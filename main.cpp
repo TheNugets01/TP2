@@ -22,5 +22,6 @@ int main()
     test->Ajouter(t5);
     
     test->Afficher();
+    cout << "je rajoute un cout pour test" << endl;
     return 0;
 }
