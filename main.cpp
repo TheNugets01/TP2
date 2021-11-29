@@ -22,5 +22,6 @@ int main()
     test->Ajouter(t5);
     
     test->Afficher();
+    cout << "salut" << endl;
     return 0;
 }
