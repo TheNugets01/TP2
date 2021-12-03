@@ -31,7 +31,7 @@ class Catalogue
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void Inserer (Trajet ainserer);
+    void Inserer(Trajet * unTrajet);
     // Mode d'emploi :
     //
     // Contrat :
@@ -69,7 +69,7 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-int * listeParcours;
+    int * ListeParcours;
 };
 
 #endif // CATALOGUE_H

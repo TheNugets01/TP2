@@ -21,30 +21,37 @@ using namespace std;
 
 //------------------------------------------------------------- Constantes
 
+// #define MAP
+
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
+char * TrajetSimple::GetVilleDepart() const
+{
+  return VilleDepart;
+}
+
+char * TrajetSimple::GetVilleArrivee() const
+{
+  return VilleArrivee;
+}
 
 void TrajetSimple::Afficher() const
 {
-  cout << "Trajet Simple de : " << villeDepart << ", jusqu'a " << villeArrivee << " en utilisant le " << moyenTransport << endl;
+  cout << "Trajet Simple de : " << VilleDepart << " à " << VilleArrivee << " en " << MoyenTransport << endl;
 }
 
 //-------------------------------------------- Constructeurs - destructeur
-TrajetSimple::TrajetSimple (const char* depart, const char* arrivee, const char* transport) : Trajet(depart,arrivee)
+TrajetSimple::TrajetSimple (char * unDepart, char * uneArrivee, char * unTransport)
 // Algorithme : Initialise le TrajetSimple
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetSimple>" << endl;
 #endif
-
-  //Evite le Segmentation Fault car char * moyenTransport initialement aléatoire
-  char Transport[sizeof(transport)];
-  moyenTransport = Transport;
-  
-  for(int i=0; i < sizeof(transport) ; ++i)
-    moyenTransport[i] = transport[i];
+  VilleDepart = unDepart;
+  VilleArrivee = uneArrivee;
+  MoyenTransport = unTransport;
 } //----- Fin de TrajetSimple
 
 
@@ -55,6 +62,10 @@ TrajetSimple::~TrajetSimple ( )
 #ifdef MAP
     cout << "Appel au destructeur de <TrajetSimple>" << endl;
 #endif
+
+  delete[] VilleDepart;
+  delete[] VilleArrivee;
+  delete[] MoyenTransport;
 } //----- Fin de ~TrajetSimple
 
 

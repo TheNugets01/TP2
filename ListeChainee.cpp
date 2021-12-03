@@ -19,52 +19,54 @@ using namespace std;
 #include "Maillon.h"
 #include "Trajet.h"
 //--------------------------------------------------------------Constantes
+
 //------------------------------------------------------------------PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void ListeChainee::Ajouter(Trajet * contenu)
+void ListeChainee::Ajouter( Trajet * contenu)
 {
   
-  if(debut == nullptr)
+  if(Debut == nullptr)
   {
-    debut = new Maillon(contenu);
+    Debut = new Maillon(contenu);
     ++nbMaillons;
   }
   else
   {
-    Maillon * actuelle = debut;
+
+    Maillon * actuelle = Debut;
     //Trie par ordre alphabetique
-    if(actuelle->GetProchain() != nullptr)
+    if( actuelle -> GetProchain() != nullptr)
     {
       cout<<"yo"<<endl;
-      while ((actuelle->GetProchain()->GetDonnee()->GetVilleDepart()) >(contenu->GetVilleDepart()))
+      while ( ( actuelle->GetProchain()->GetTrajet()->GetVilleDepart() )[0] < (contenu->GetVilleDepart())[0] )
       { 
-        actuelle = actuelle->GetProchain();
+        actuelle = actuelle -> GetProchain();
       }
     }
 
 
     Maillon * nouveau = new Maillon(contenu);
-    nouveau->SetDonnee(contenu);
+    nouveau -> SetTrajet(contenu);
     
     Maillon * MemSuivant = actuelle->GetProchain();
 
-    nouveau->SetProchain(MemSuivant);
-    actuelle->SetProchain(nouveau);
+    nouveau -> SetProchain( MemSuivant );
+    actuelle -> SetProchain( nouveau );
     
     ++nbMaillons;
   }
 }
 
-void ListeChainee::Afficher ()
+void ListeChainee::Afficher () const
 {
-  Maillon * courant = debut;
+  Maillon * courant = Debut;
   while( courant->GetProchain() != nullptr )
   {
-    courant->GetDonnee()->Afficher();
+    courant -> GetTrajet()->Afficher();
     courant = courant->GetProchain();
   }
-  courant->GetDonnee()->Afficher();
+  courant->GetTrajet()->Afficher();
 }
 
 //---------------------------- Constructeurs - destructeur
@@ -72,12 +74,12 @@ ListeChainee::ListeChainee ( )
 // Algorithme :
 //
 {
-#ifdef MAP
-    cout << "Appel au constructeur de <ListeChainee>" << endl;
-#endif
+  #ifdef MAP
+      cout << "Appel au constructeur de <ListeChainee>" << endl;
+  #endif
 
-debut = nullptr;
-nbMaillons = 0;
+  Debut = nullptr;
+  nbMaillons = 0;
 
 } //----- Fin de ListeChainee
 
@@ -86,11 +88,12 @@ ListeChainee::~ListeChainee ( )
 // Algorithme :
 //
 {
-#ifdef MAP
-    cout << "Appel au destructeur de <Xxx>" << endl;
-#endif
-delete debut; //les maillons intermediaire sont supprimé grace a ~Maillon
-// delete fin; non nécessaire
+  #ifdef MAP
+      cout << "Appel au destructeur de <ListeChainee>" << endl;
+  #endif
+
+  delete Debut; //les maillons intermediaire sont supprimé grace a ~Maillon
+
 } //----- Fin de ~ListeChainee
 
 

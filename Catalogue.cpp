@@ -25,7 +25,7 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-void Catalogue::Inserer(Trajet ainserer)
+void Catalogue::Inserer(Trajet * ainserer)
 {
   
 }
@@ -35,20 +35,22 @@ void Catalogue::Afficher ()
   
 }
 
-Trajet* Catalogue::Rechercher (char * depart, char * arrivee , char * transport)
+Trajet* Catalogue::Rechercher (char * unDepart, char * uneArrivee , char * unTransport)
 {
-  
+    
 }
 
 //-------------------------------------------- Constructeurs - destructeur
-Catalogue::Catalogue (int* parcours) : listeParcours(parcours)
+Catalogue::Catalogue (int* parcours) : ListeParcours(parcours)
 // Algorithme : Initialise le Catalogue
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Catalogue>" << endl;
 #endif
-} //----- Fin de maillon
+} 
+
+//----- Fin de maillon
 
 
 Catalogue::~Catalogue ( )

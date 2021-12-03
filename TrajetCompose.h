@@ -59,7 +59,7 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-ListeChainee * listeTrajets;
+    ListeChainee * listeTrajets;
 };
 
 #endif // TrajetCompose_H

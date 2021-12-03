@@ -29,15 +29,14 @@ class Trajet
 
 public:
 //----------------------------------------------------- Méthodes publiques
-  virtual void Afficher() const =0;
-
-  char * GetVilleDepart();
-  char * GetVilleArrivee();
+  virtual void Afficher() const = 0;
+  virtual char * GetVilleDepart() const = 0;
+  virtual char * GetVilleArrivee() const = 0;
 
 
 //-------------------------------------------- Constructeurs - destructeur
 
-  Trajet ( const char* depart, const char* arrivee);
+  Trajet ();
 
   virtual ~Trajet ( );
 
@@ -47,8 +46,6 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-char * villeDepart ;
-char * villeArrivee;
 };
 
 #endif // TRAJET_H

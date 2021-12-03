@@ -23,28 +23,28 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-Trajet * Maillon::GetDonnee()
+Trajet * Maillon::GetTrajet() const
 {
-  return donnee;
+  return trajet;
 }
 
-Maillon * Maillon::GetProchain()
+Maillon * Maillon::GetProchain() const
 {
-  return prochain;
+  return Prochain;
 }
 
-void Maillon::SetDonnee( Trajet * uneDonnee )
+void Maillon::SetTrajet( Trajet * unTrajet )
 {
-  donnee = uneDonnee;
+  trajet = unTrajet;
 }
 
 void Maillon::SetProchain( Maillon* unProchain )
 {
-  prochain = unProchain;
+  Prochain = unProchain;
 }
 
 //-------------------------------------------- Constructeurs - destructeur
-Maillon::Maillon (Trajet * contenu) : donnee(contenu),prochain(nullptr)
+Maillon::Maillon ( Trajet * contenu) : trajet(contenu),Prochain(nullptr)
 // Algorithme : Initialise le maillon avec la donnée et sans maillon suivant
 //
 {
@@ -62,10 +62,12 @@ Maillon::~Maillon ( )
       cout << "Appel au destructeur de <Maillon>" << endl;
   #endif
 
-  if ( prochain != nullptr )
+  if ( Prochain != nullptr )
   {
-    delete ( prochain );
+    delete ( Prochain );
   }
+
+  delete trajet;
 } //----- Fin de ~Maillon
 
 

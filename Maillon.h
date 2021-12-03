@@ -28,20 +28,20 @@ class Maillon
 public:
 //----------------------------------------------------- Méthodes publiques
 //-------------------------------------------- Constructeurs - destructeur
-    Maillon (Trajet * contenu);
+    Maillon ( Trajet * contenu);
     virtual ~Maillon ( );
 //----------------------------------------------------------------Getteur
-Trajet * GetDonnee();
-Maillon * GetProchain();
+    Trajet * GetTrajet() const;
+    Maillon * GetProchain() const;
 //----------------------------------------------------------------Setteur
-void SetDonnee( Trajet * uneDonnee );
-void SetProchain( Maillon * unProchain);
+    void SetTrajet( Trajet * unTrajet );
+    void SetProchain( Maillon * unProchain);
 
 protected:
 //----------------------------------------------------- Méthodes protégées
 //----------------------------------------------------- Attributs protégés
-Trajet * donnee;
-Maillon * prochain;
+    Trajet * trajet;
+    Maillon * Prochain;
 
 };
 

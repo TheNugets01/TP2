@@ -23,10 +23,11 @@ class TrajetSimple : public Trajet
 
 public:
 //----------------------------------------------------- Méthodes publiques
-
+    char * GetVilleDepart() const;
+    char * GetVilleArrivee() const;
 //-------------------------------------------- Constructeurs - destructeur
-
-    TrajetSimple (const char* depart, const char* arrivee, const char* transport);
+    
+    TrajetSimple (char * unDepart, char * uneArrivee, char * unTransport);
     void Afficher() const;
 
     virtual ~TrajetSimple ( );
@@ -37,7 +38,9 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-char * moyenTransport;
+char * VilleArrivee;
+char * VilleDepart;
+char * MoyenTransport;
 };
 
 #endif // TRAJETSIMPLE_H

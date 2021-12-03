@@ -29,20 +29,20 @@ class ListeChainee
 {
 public:
 //--------------------------- Méthodes publiques
-void Ajouter(Trajet * contenu) ;
-void Afficher ();
+  void Ajouter( Trajet * contenu) ;
+  void Afficher () const;
 
 //---- Constructeurs - destructeur
-ListeChainee ( );
-virtual ~ListeChainee ( );
+  ListeChainee ( );
+  virtual ~ListeChainee ( );
     
 protected:
 //------------ Méthodes protégées
 
 //--- Attributs protégés
-Maillon * debut;
-//Maillon * fin;
-int nbMaillons;
+  Maillon * Debut;
+  Maillon * Fin;
+  int nbMaillons;
 
 };
 
