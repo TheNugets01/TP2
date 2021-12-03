@@ -26,7 +26,7 @@ int main()
     // test2->Ajouter(t4);
 
     // Trajet * t5 = new TrajetCompose("ok","oui",test2);
-    // test->Ajouter(t5); TEST
+    // test->Ajouter(t5);
     
     test -> Afficher();
 
