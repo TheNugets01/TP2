@@ -23,22 +23,25 @@ using namespace std;
 //------------------------------------------------------------------PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void ListeChainee::Ajouter( Trajet * contenu)
+Maillon * ListeChainee::GetDebut() const
+{
+  return debut;
+}
+
+void ListeChainee::AjouterTri( Trajet * contenu)
 {
   
-  if(Debut == nullptr)
+  if(debut == nullptr)
   {
-    Debut = new Maillon(contenu);
-    ++nbMaillons;
+    debut = new Maillon(contenu);
   }
   else
   {
 
-    Maillon * actuelle = Debut;
+    Maillon * actuelle = debut;
     //Trie par ordre alphabetique
     if( actuelle -> GetProchain() != nullptr)
     {
-      cout<<"yo"<<endl;
       while ( ( actuelle->GetProchain()->GetTrajet()->GetVilleDepart() )[0] < (contenu->GetVilleDepart())[0] )
       { 
         actuelle = actuelle -> GetProchain();
@@ -53,14 +56,28 @@ void ListeChainee::Ajouter( Trajet * contenu)
 
     nouveau -> SetProchain( MemSuivant );
     actuelle -> SetProchain( nouveau );
-    
-    ++nbMaillons;
+  }
+}
+
+void ListeChainee::AjouterFin( Trajet * contenu)
+{
+  
+  if(debut == nullptr)
+  {
+    debut = new Maillon(contenu);
+    fin = debut;
+  }
+  else
+  {
+    Maillon * nouveau = new Maillon(contenu);
+    fin -> SetProchain( nouveau );
+    fin = nouveau;
   }
 }
 
 void ListeChainee::Afficher () const
 {
-  Maillon * courant = Debut;
+  Maillon * courant = debut;
   while( courant->GetProchain() != nullptr )
   {
     courant -> GetTrajet()->Afficher();
@@ -78,8 +95,8 @@ ListeChainee::ListeChainee ( )
       cout << "Appel au constructeur de <ListeChainee>" << endl;
   #endif
 
-  Debut = nullptr;
-  nbMaillons = 0;
+  debut = nullptr;
+  fin = debut;
 
 } //----- Fin de ListeChainee
 
@@ -92,7 +109,7 @@ ListeChainee::~ListeChainee ( )
       cout << "Appel au destructeur de <ListeChainee>" << endl;
   #endif
 
-  delete Debut; //les maillons intermediaire sont supprimé grace a ~Maillon
+  delete debut; //les maillons intermediaire sont supprimé grace a ~Maillon -> pas de delete fin
 
 } //----- Fin de ~ListeChainee
 

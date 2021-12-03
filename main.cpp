@@ -1,6 +1,7 @@
 #include "ListeChainee.h"
 #include "Trajet.h"
 #include "TrajetSimple.h"
+#include "TrajetCompose.h"
 #include <iostream>
 
 using namespace std;
@@ -16,21 +17,22 @@ int main()
     ListeChainee * test = new ListeChainee();
     Trajet * t1 = new TrajetSimple( Saisi() , Saisi() , Saisi() );
     Trajet * t2 = new TrajetSimple( Saisi() , Saisi() , Saisi() );
-    test->Ajouter(t1); 
-    test->Ajouter(t2);
+    test->AjouterFin(t1); 
+    test->AjouterFin(t2);
 
-    // ListeChainee * test2 = new ListeChainee();
-    // Trajet * t3 = new TrajetSimple("Paris","Londres","Avion");
-    // Trajet * t4 = new TrajetSimple("Schweighouse","Haguenau","Train");
-    // test2->Ajouter(t3);
-    // test2->Ajouter(t4);
+    ListeChainee * test2 = new ListeChainee();
+    Trajet * t3 = new TrajetSimple("AZ" , "ER" , "PR");
+    Trajet * t4 = new TrajetSimple("LA" , "MO" , "NB");
+    test2->AjouterFin(t3);
+    test2->AjouterFin(t4);
 
-    // Trajet * t5 = new TrajetCompose("ok","oui",test2);
-    // test->Ajouter(t5);
+    Trajet * t5 = new TrajetCompose(test2);
+    test->AjouterFin(t5);
     
     test -> Afficher();
 
     delete test ;
+    delete test2 ;
 
     return 0;
 }

@@ -1,5 +1,5 @@
-main : Catalogue.o ListeChainee.o Maillon.o Trajet.o  TrajetSimple.o main.o 
-		g++ -o main Catalogue.o ListeChainee.o Maillon.o Trajet.o TrajetSimple.o main.o -ansi -pedantic -Wall -std=c++11
+main : Catalogue.o ListeChainee.o Maillon.o Trajet.o  TrajetSimple.o TrajetCompose.o main.o 
+		g++ -o main Catalogue.o ListeChainee.o Maillon.o Trajet.o TrajetSimple.o TrajetCompose.o main.o -ansi -pedantic -Wall -std=c++11
 
 Catalogue.o : Catalogue.cpp
 		g++ -c -g -ansi -pedantic -Wall -std=c++11 Catalogue.cpp
@@ -15,6 +15,9 @@ Trajet.o : Trajet.cpp
 
 TrajetSimple.o : TrajetSimple.cpp
 		g++ -c -g -ansi -pedantic -Wall -std=c++11 TrajetSimple.cpp
+
+TrajetCompose.o : TrajetCompose.cpp
+		g++ -c -g -ansi -pedantic -Wall -std=c++11 TrajetCompose.cpp
 
 main.o : main.cpp
 		g++ -c -g -ansi -pedantic -Wall -std=c++11 main.cpp

@@ -24,14 +24,21 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
+char * TrajetCompose::GetVilleDepart() const //pas sur d'en avoir besoin
+{
+  return listeTrajets->GetDebut()->GetTrajet()->GetVilleDepart();
+}
+  
+char * TrajetCompose::GetVilleArrivee() const{}
+
 void TrajetCompose::Afficher() const
 {
   cout << "Trajet Composee de : " << endl;
-  listeTrajets->Afficher();
+  //listeTrajets->Afficher();
 }
 
 //-------------------------------------------- Constructeurs - destructeur
-TrajetCompose::TrajetCompose ( const char* depart, const char* arrivee, ListeChainee * trajets) : Trajet(depart , arrivee), listeTrajets(trajets)
+TrajetCompose::TrajetCompose (ListeChainee * trajets) : listeTrajets(trajets)
 // Algorithme : Initialise le TrajetCompose
 //
 {
@@ -48,6 +55,7 @@ TrajetCompose::~TrajetCompose ( )
 #ifdef MAP
     cout << "Appel au destructeur de <TrajetCompose>" << endl;
 #endif
+delete[] listeTrajets;
 } //----- Fin de ~TrajetCompose
 
 

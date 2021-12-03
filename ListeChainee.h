@@ -29,8 +29,10 @@ class ListeChainee
 {
 public:
 //--------------------------- Méthodes publiques
-  void Ajouter( Trajet * contenu) ;
+  void AjouterTri( Trajet * contenu);
+  void AjouterFin( Trajet * contenu);
   void Afficher () const;
+  Maillon * GetDebut() const;
 
 //---- Constructeurs - destructeur
   ListeChainee ( );
@@ -40,9 +42,8 @@ protected:
 //------------ Méthodes protégées
 
 //--- Attributs protégés
-  Maillon * Debut;
-  Maillon * Fin;
-  int nbMaillons;
+  Maillon * debut;
+  Maillon * fin;
 
 };
 

@@ -38,10 +38,12 @@ public:
     // Contrat :
     //
     void Afficher() const;
+    char * GetVilleDepart() const; //pas sur d'en avoir besoin
+    char * GetVilleArrivee() const;
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    TrajetCompose ( const char* depart,  const char* arrivee, ListeChainee * trajets);
+    TrajetCompose (ListeChainee * trajets);
     // Mode d'emploi : Donne en paramètre le contenu du TrajetCompose 
     //
     // Contrat :
