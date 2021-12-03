@@ -3,6 +3,7 @@
 #include "TrajetSimple.h"
 #include "TrajetCompose.h"
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
@@ -39,22 +40,14 @@ int main()
 
 char * Saisi()
 {
-    char nom[TAILLEBUFFER];
-    cin >> nom;
+    char unMot[TAILLEBUFFER];
+    cin >> unMot;
 
-    int Taille = 0;
+    char * LeMot = new char[strlen(unMot)];
 
-    for(int i=0 ; nom[i] != '\0' && i < TAILLEBUFFER ; ++i)
+    for( int i = 0 ; i < int(strlen(unMot)) ; ++i)
     {
-        ++Taille;
-    }
-
-    char * LeMot = new char[Taille];
-
-    for( int i = 0 ; i < Taille ; ++i)
-    {
-        LeMot[i] = nom[i];
-        
+        LeMot[i] = unMot[i];
     }
 
     return LeMot;
