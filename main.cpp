@@ -51,7 +51,7 @@ char * Saisi( )
 
     for( int i = 0 ; i < int(strlen(unMot)) ; ++i)
     {
-        LeMot[i] = unMot[i];
+        LeMot[i] = unMot[i]; // ya strcpy aussi je crois
     }
 
     return LeMot;
@@ -68,46 +68,64 @@ void Menu(Catalogue * catalogue)
     cin >> lecture;
     while (lecture!=4)
     {
-        if (lecture==1)
+        if (lecture==1) // Desfois quand on affiche les trajets il affiche des caractères chelou jsp pk surement un problème d'accès a la mémoire 
         {
-            cout << "Souhaitez vous ajouter :" << endl;
-            cout << "1 : Un trajet simple"<< endl;
-            cout << "2 : Un trajet compose"<< endl;
-            do{cin >> lecture;}while(lecture != 1 && lecture !=2);
-            if(lecture==1)
+            bool estTC = false;
+            ListeChainee * tc;
+            cout << "Veuillez indiquez votre Ville de depart" << endl;
+            char * depart = Saisi();
+            cout << "Quel est la prochaine destination ?" << endl;
+            char * arrive = Saisi();
+            cout << "Par quel moyen de transport ?" << endl;
+            char * transport = Saisi();
+            Trajet * t1 = new TrajetSimple(depart,arrive,transport);
+            cout << "Quel est la prochaine destination ? (Si Fini tapez -1)" << endl;
+            depart = new char[strlen(arrive)];
+            strcpy(depart,arrive);
+            arrive = Saisi();
+
+            while(strcmp(arrive,"-1")!=0)
             {
-                cout << "Veuillez indiquez votre Ville de depart" << endl;
-                char * depart = Saisi();
-                cout << "Veuillez indiquez votre Ville d'arrive" << endl;
-                char * arrive = Saisi();
-                cout << "Veuillez indiquez votre moyen de transport" << endl;
-                char * transport = Saisi();
-                catalogue->Inserer(new TrajetSimple(depart,arrive,transport));
-            }
-            else if(lecture==2)
-            {
-                cout << "Veuillez indiquez votre Ville de depart" << endl;
-                char * depart = Saisi();
-                while("Jsp encore")
+                if(!estTC)
                 {
-                    cout << "Quel est la prochaine destination ?" << endl;
-                    char * arrive = Saisi();
-                    cout << "Par quel moyen de transport ?" << endl;
-                    char * transport = Saisi();
+                    tc = new ListeChainee();
+                    tc->AjouterFin(t1);
+                    estTC = true;
                 }
+                cout << "Par quel moyen de transport ?" << endl;
+                transport = Saisi();
+                tc->AjouterFin(new TrajetSimple(depart,arrive,transport));
+                cout << "Quel est la prochaine destination ? (Si Fini tapez -1)" << endl;
+                depart = new char[strlen(arrive)];
+                strcpy(depart,arrive);
+                arrive = Saisi();
             }
+            if(!estTC)
+                catalogue->Inserer(t1);
+            else
+                catalogue->Inserer(new TrajetCompose(tc));
+            delete[] arrive;
+            delete[] depart;
         }
         else if (lecture==2)
         {
             catalogue -> Afficher();
+            cout << endl;
+            cout << "Pour retourner au menu tapez un chiffre" << endl;
+            int c;
+            cin >> c;
         }
         else if (lecture==3)
         {
             cout << "D'ou voulez vous partir ?" << endl;
-            char * depart = Saisi(); // Attention on ne delete jamais la Saisi !!!
+            char * depart = Saisi(); // Attention on ne delete jamais la Saisi !!! ////!!!\\\\\ Perte de mémoire
             cout << "Pour arriver ou ?" << endl;
-            char * arrive = Saisi(); // Attention on ne delete jamais la Saisi !!!
+            char * arrive = Saisi(); // Attention on ne delete jamais la Saisi !!! ////!!!\\\\\ Perte de mémoire
             catalogue -> Rechercher(depart,arrive);
+            cout << endl;
+            cout << "Pour retourner au menu tapez un chiffre" << endl;
+            int c;
+            cin >> c;
         }
         else
         {

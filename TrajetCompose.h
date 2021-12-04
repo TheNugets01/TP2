@@ -39,7 +39,7 @@ public:
     //
     void Afficher() const;
     void Afficher(int mode) const;
-    char * GetVilleDepart() const; //pas sur d'en avoir besoin
+    char * GetVilleDepart() const;
     char * GetVilleArrivee() const;
 
 //-------------------------------------------- Constructeurs - destructeur
