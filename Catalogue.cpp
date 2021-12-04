@@ -39,8 +39,7 @@ void Catalogue::Afficher ()
 
 void Catalogue::Rechercher (char * unDepart, char * uneArrivee)
 {
-    cout << "Vous voulez voyager entre " << unDepart << " et " << uneArrivee <<endl;
-    cout << " Voila nos propositions :" << endl;
+    cout << "Vous voulez voyager entre " << unDepart << " et " << uneArrivee <<  ", Voila nos propositions :" << endl;
     Trajet * temp;
     Maillon * courant = listeParcours->GetDebut();
   while( courant->GetProchain() != nullptr )
