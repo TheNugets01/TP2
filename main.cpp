@@ -1,5 +1,6 @@
 #include "ListeChainee.h"
 #include "Trajet.h"
+#include "Catalogue.h"
 #include "TrajetSimple.h"
 #include "TrajetCompose.h"
 #include <iostream>
@@ -15,31 +16,31 @@ char * Saisi(  );
 
 int main()
 {
-    ListeChainee * test = new ListeChainee();
+    Catalogue * notreCatalogue = new Catalogue();
     Trajet * t1 = new TrajetSimple( Saisi() , Saisi() , Saisi() );
-    Trajet * t2 = new TrajetSimple( Saisi() , Saisi() , Saisi() );
-    test->AjouterFin(t1); 
-    test->AjouterFin(t2);
+    Trajet * t2 = new TrajetSimple( Saisi(), Saisi() , Saisi() );
+    notreCatalogue->Inserer(t1); 
+    notreCatalogue->Inserer(t2);
 
     ListeChainee * test2 = new ListeChainee();
-    Trajet * t3 = new TrajetSimple("AZ" , "ER" , "PR");
-    Trajet * t4 = new TrajetSimple("LA" , "MO" , "NB");
+    Trajet * t3 = new TrajetSimple(Saisi() , Saisi() , Saisi());
+    Trajet * t4 = new TrajetSimple(Saisi() , Saisi() , Saisi());
     test2->AjouterFin(t3);
     test2->AjouterFin(t4);
 
     Trajet * t5 = new TrajetCompose(test2);
-    test->AjouterFin(t5);
+    notreCatalogue->Inserer(t5);
     
-    test -> Afficher();
-
-    delete test ;
-    delete test2 ;
+    notreCatalogue -> Afficher();
+    notreCatalogue -> Rechercher(Saisi() , Saisi());
+    delete notreCatalogue ;
 
     return 0;
 }
 
-char * Saisi()
+char * Saisi( )
 {
+    //char * unMot = "LA";
     char unMot[TAILLEBUFFER];
     cin >> unMot;
 

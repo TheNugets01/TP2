@@ -38,6 +38,7 @@ public:
     // Contrat :
     //
     void Afficher() const;
+    void Afficher(int mode) const;
     char * GetVilleDepart() const; //pas sur d'en avoir besoin
     char * GetVilleArrivee() const;
 

@@ -41,6 +41,11 @@ void TrajetSimple::Afficher() const
   cout << "Trajet Simple de : " << VilleDepart << " à " << VilleArrivee << " en " << MoyenTransport << endl;
 }
 
+void TrajetSimple::Afficher(int mode) const
+{
+  cout << " - " << VilleDepart << " à " << VilleArrivee << " en " << MoyenTransport << endl;
+}
+
 //-------------------------------------------- Constructeurs - destructeur
 TrajetSimple::TrajetSimple (char * unDepart, char * uneArrivee, char * unTransport)
 // Algorithme : Initialise le TrajetSimple
@@ -62,7 +67,6 @@ TrajetSimple::~TrajetSimple ( )
 #ifdef MAP
     cout << "Appel au destructeur de <TrajetSimple>" << endl;
 #endif
-
   delete[] VilleDepart;
   delete[] VilleArrivee;
   delete[] MoyenTransport;

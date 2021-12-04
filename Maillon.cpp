@@ -64,10 +64,10 @@ Maillon::~Maillon ( )
 
   if ( Prochain != nullptr )
   {
-    delete ( Prochain );
+    delete Prochain;
   }
-
-  delete trajet;
+    delete trajet;
+  
 } //----- Fin de ~Maillon
 
 

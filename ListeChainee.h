@@ -32,7 +32,9 @@ public:
   void AjouterTri( Trajet * contenu);
   void AjouterFin( Trajet * contenu);
   void Afficher () const;
+  void Afficher (int mode) const;
   Maillon * GetDebut() const;
+  Maillon * GetFin() const;
 
 //---- Constructeurs - destructeur
   ListeChainee ( );

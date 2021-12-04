@@ -13,6 +13,7 @@
 //--------------------------------------------------- Interfaces utilisées
 
 #include "Trajet.h"
+#include "ListeChainee.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -41,7 +42,7 @@ public:
     //
     // Contrat :
     // Permet d'afficher le contenu du catalogue
-    Trajet* Rechercher (char * depart, char * arrivee , char *transport);
+    void Rechercher (char * depart, char * arrivee);
     // Mode d'emploi :
     //
     // Contrat :
@@ -51,7 +52,7 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    Catalogue (int* parcours);
+    Catalogue ();
     // Mode d'emploi : Donne en paramètre le contenu du Catalogue 
     //
     // Contrat :
@@ -69,7 +70,7 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-    int * ListeParcours;
+    ListeChainee * listeParcours;
 };
 
 #endif // CATALOGUE_H

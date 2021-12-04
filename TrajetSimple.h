@@ -29,6 +29,7 @@ public:
     
     TrajetSimple (char * unDepart, char * uneArrivee, char * unTransport);
     void Afficher() const;
+    void Afficher(int mode) const;
 
     virtual ~TrajetSimple ( );
 

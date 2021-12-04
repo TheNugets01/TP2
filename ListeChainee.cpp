@@ -28,6 +28,11 @@ Maillon * ListeChainee::GetDebut() const
   return debut;
 }
 
+Maillon * ListeChainee::GetFin() const
+{
+  return fin;
+}
+
 void ListeChainee::AjouterTri( Trajet * contenu)
 {
   
@@ -86,6 +91,17 @@ void ListeChainee::Afficher () const
   courant->GetTrajet()->Afficher();
 }
 
+void ListeChainee::Afficher (int mode) const
+{
+  Maillon * courant = debut;
+  while( courant->GetProchain() != nullptr )
+  {
+    courant -> GetTrajet()->Afficher(mode);
+    courant = courant->GetProchain();
+  }
+  courant->GetTrajet()->Afficher(mode);
+}
+
 //---------------------------- Constructeurs - destructeur
 ListeChainee::ListeChainee ( )
 // Algorithme :
@@ -110,7 +126,6 @@ ListeChainee::~ListeChainee ( )
   #endif
 
   delete debut; //les maillons intermediaire sont supprimé grace a ~Maillon -> pas de delete fin
-
 } //----- Fin de ~ListeChainee
 
 
