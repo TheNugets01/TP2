@@ -134,9 +134,10 @@ void Menu(Catalogue * catalogue)
         {
             cout << "Je n'ai pas compris veuillez recommencer !" << endl << ">> ";
 
-            while(getchar() != '\n'); //vider le buffer clavier en cas de mauvaise saisi
+            
         }
 
+        while(getchar() != '\n'); //vider le buffer clavier en cas de mauvaise saisi
         cout << endl << "Veuillez choisir une Action :" << endl;
         cout << "1 : Ajouter un trajet au catalogue" << endl;
         cout << "2 : Afficher le catalogue" << endl;
