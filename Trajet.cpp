@@ -32,7 +32,7 @@ Trajet::Trajet ()
 #ifdef MAP
     cout << "Appel au constructeur de <Trajet>" << endl;
 #endif
-} //----- Fin de maillon
+} //----- Fin de Trajet
 
 
 Trajet::~Trajet ( )
@@ -42,7 +42,7 @@ Trajet::~Trajet ( )
 #ifdef MAP
     cout << "Appel au destructeur de <Trajet>" << endl;
 #endif
-} //----- Fin de ~Maillon
+} //----- Fin de ~Trajet
 
 
 //------------------------------------------------------------------ PRIVE

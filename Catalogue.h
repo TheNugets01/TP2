@@ -12,7 +12,6 @@
 
 //--------------------------------------------------- Interfaces utilisées
 
-#include "Trajet.h"
 #include "ListeChainee.h"
 
 //------------------------------------------------------------- Constantes

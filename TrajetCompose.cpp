@@ -1,5 +1,5 @@
 /*************************************************************************
-                           TrajetCompose  -  implémente un TrajetCompose
+                           TrajetCompose  -  implemente un TrajetCompose
                              -------------------
     début                : 19/11/2021
     copyright            : (C) 2021 par Hugo Blaess & Octave Duvivier
@@ -24,27 +24,36 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-char * TrajetCompose::GetVilleDepart() const
-{
-  return listeTrajets->GetDebut()->GetTrajet()->GetVilleDepart();
-}
-
-char * TrajetCompose::GetVilleArrivee() const
-{
-  return listeTrajets->GetFin()->GetTrajet()->GetVilleArrivee();
-}
-
 void TrajetCompose::Afficher() const
+// Algorithme : Permet d'Afficher le TrajetCompose
+//
 {
   cout << "Trajet Composee de : " << endl;
   listeTrajets->Afficher(1);
-}
+} //----- Fin de Afficher
 
 void TrajetCompose::Afficher(int mode) const
+// Algorithme : Ici la surchage d'afficher ne sert a rien on redirige vers la methode initiale
+//
 {
-  cout << "Trajet Composee de : " << endl;
-  listeTrajets->Afficher(mode);
-}
+  Afficher();
+} //----- Fin de Afficher
+
+//----------------------------------------------------------------Getteur
+
+char * TrajetCompose::GetVilleDepart() const
+// Algorithme : Permet d'accéder a la ville de depart du trajet
+//
+{
+  return listeTrajets->GetDebut()->GetTrajet()->GetVilleDepart();
+} //----- Fin de GetVilleDepart
+
+char * TrajetCompose::GetVilleArrivee() const
+// Algorithme : Permet d'accéder a la ville d'arrive du trajet
+//
+{
+  return listeTrajets->GetFin()->GetTrajet()->GetVilleArrivee();
+} //----- Fin de GetVilleArrive
 
 //-------------------------------------------- Constructeurs - destructeur
 TrajetCompose::TrajetCompose (ListeChainee * trajets)

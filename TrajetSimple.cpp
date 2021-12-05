@@ -1,5 +1,5 @@
 /*************************************************************************
-                           TrajetSimple  -  implémente un TrajetSimple
+                           TrajetSimple  -  implemente un TrajetSimple
                              -------------------
     début                : 19/11/2021
     copyright            : (C) 2021 par Hugo Blaess & Octave Duvivier
@@ -21,30 +21,37 @@ using namespace std;
 
 //------------------------------------------------------------- Constantes
 
-// #define MAP
-
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-char * TrajetSimple::GetVilleDepart() const
-{
-  return VilleDepart;
-}
-
-char * TrajetSimple::GetVilleArrivee() const
-{
-  return VilleArrivee;
-}
 
 void TrajetSimple::Afficher() const
+// Algorithme : Permet d'afficher le contenu du trajetsimple
+//
 {
   cout << "Trajet Simple de : " << VilleDepart << " à " << VilleArrivee << " en " << MoyenTransport << endl;
-}
+} //----- Fin de Afficher
 
 void TrajetSimple::Afficher(int mode) const
+// Algorithme : Permet d'afficher le contenu du trajet simple au sein d'un trajet compose
+//
 {
   cout << " - " << VilleDepart << " à " << VilleArrivee << " en " << MoyenTransport << endl;
-}
+} //----- Fin de Afficher
+//----------------------------------------------------------------Getteur
+
+char * TrajetSimple::GetVilleDepart() const
+// Algorithme : Permet d'accéder a la ville de depart du trajet
+//
+{
+  return VilleDepart;
+} //----- Fin de GetVilleDepart
+char * TrajetSimple::GetVilleArrivee() const
+// Algorithme : Permet d'accéder a la ville d'arrive du trajet
+//
+{
+  return VilleArrivee;
+} //----- Fin de GetVilleArrivee
 
 //-------------------------------------------- Constructeurs - destructeur
 TrajetSimple::TrajetSimple (char * unDepart, char * uneArrivee, char * unTransport)

@@ -1,11 +1,12 @@
 Liste de choses restantes à faire :
 
-- Finir l'ajout trié aux listes
-- Paramétrer le makefile pour pouvoir inclure MAP au lancement
+- Finir l'ajout trié aux listes*
+- Corriger les erreurs valgrinds que je comprends pas
 - Changer l'interface si tu trouves que des trucs sont pas pratique ou pas beau
+- La surchage d'Afficher est un peu bancale si tu trouves une autre solution jss chaud
 - Vérifier la cohérance de nos classes et méthodes (chaque chose au bon endroit, pas de répétition, pas d'algo chelou bricolé)
-- Vérifier les const
-- Vérifier qu'on respecte bien les squelettes de classes (Expliquer le role des classes dans l'entete, le mode d'emploi des methodes, map des constructeurs cf squelettes)
+- Vérifier les const et voir où on peut en ajouter
+- Mode Emploi des méthodes dans le point h (jsp quoi mettre) + Explications des classes et méthodes un peu bancale 
 - Commenter le code (ne pas abuser)
 
 

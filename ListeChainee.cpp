@@ -1,5 +1,5 @@
 /*************************************************************************
-                           ListeChainee  -  implémente une liste chainée
+                           ListeChainee  -  implemente une liste chainee
                              -------------------
     début                : 19/11/2021
     copyright            : 2021 par Hugo Blaess & Octave Duvivier
@@ -16,24 +16,28 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "ListeChainee.h"
-#include "Maillon.h"
-#include "Trajet.h"
 //--------------------------------------------------------------Constantes
 
 //------------------------------------------------------------------PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
 Maillon * ListeChainee::GetDebut() const
+// Algorithme : Permet d'accéder au premier maillon de la liste
+//
 {
   return debut;
-}
+} //----- Fin de GetDebut
 
 Maillon * ListeChainee::GetFin() const
+// Algorithme : Permet d'accéder au dernier maillon de la liste
+//
 {
   return fin;
-}
+} //----- Fin de GetFin
 
 void ListeChainee::AjouterTri( Trajet * contenu)
+// Algorithme : Permet d'ajouter un trajet à la liste en triant par ordre alphabétique de la ville de depart
+//
 {
   
   if(debut == nullptr)
@@ -62,9 +66,11 @@ void ListeChainee::AjouterTri( Trajet * contenu)
     nouveau -> SetProchain( MemSuivant );
     actuelle -> SetProchain( nouveau );
   }
-}
+} //----- Fin de AjouterTri
 
 void ListeChainee::AjouterFin( Trajet * contenu)
+// Algorithme : Permet d'ajouter un trajet en fin de liste
+//
 {
   
   if(debut == nullptr)
@@ -78,9 +84,11 @@ void ListeChainee::AjouterFin( Trajet * contenu)
     fin -> SetProchain( nouveau );
     fin = nouveau;
   }
-}
+} //----- Fin de AjouterFin
 
 void ListeChainee::Afficher () const
+// Algorithme : Permet d'afficher tous les trajets de la liste 
+//
 {
   Maillon * courant = debut;
   while( courant->GetProchain() != nullptr )
@@ -89,9 +97,11 @@ void ListeChainee::Afficher () const
     courant = courant->GetProchain();
   }
   courant->GetTrajet()->Afficher();
-}
+} //----- Fin de Afficher
 
 void ListeChainee::Afficher (int mode) const
+// Algorithme : Permet d'adapter l'affichage des trajets simple etant dans les trajets compose
+//
 {
   Maillon * courant = debut;
   while( courant->GetProchain() != nullptr )
@@ -100,11 +110,11 @@ void ListeChainee::Afficher (int mode) const
     courant = courant->GetProchain();
   }
   courant->GetTrajet()->Afficher(mode);
-}
+} //----- Fin de Afficher
 
 //---------------------------- Constructeurs - destructeur
 ListeChainee::ListeChainee ( )
-// Algorithme :
+// Algorithme : Initialise les pointeurs de debut et fin de liste
 //
 {
   #ifdef MAP
@@ -118,14 +128,14 @@ ListeChainee::ListeChainee ( )
 
 
 ListeChainee::~ListeChainee ( )
-// Algorithme :
+// Algorithme : Detruit le premier maillon de la liste (les autres seront detruit en cascade par ~Maillon)
 //
 {
   #ifdef MAP
       cout << "Appel au destructeur de <ListeChainee>" << endl;
   #endif
 
-  delete debut; //les maillons intermediaire sont supprimé grace a ~Maillon -> pas de delete fin
+  delete debut; 
 } //----- Fin de ~ListeChainee
 
 

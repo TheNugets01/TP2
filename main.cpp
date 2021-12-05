@@ -1,5 +1,3 @@
-#include "ListeChainee.h"
-#include "Trajet.h"
 #include "Catalogue.h"
 #include "TrajetSimple.h"
 #include "TrajetCompose.h"
@@ -9,8 +7,6 @@
 using namespace std;
 
 #define TAILLEBUFFER 100
-
-
 
 char * Saisi(  );
 void Menu(Catalogue * catalogue);
@@ -42,6 +38,7 @@ int main()
 }
 
 char * Saisi( )
+// Algorithme : Permet de saisir une chaine de caractère au clavier et de la ranger dans une zone alloué dynamiquement
 {
     //char * unMot = "LA";
     char unMot[TAILLEBUFFER];
@@ -55,9 +52,11 @@ char * Saisi( )
     }
 
     return LeMot;
-}
+} //----- Fin de Saisi
 
 void Menu(Catalogue * catalogue)
+// Algorithme : Permet d'afficher le menu et de gerer les interactions avec l'utilisateur
+//
 {
     cout << "Veuillez choisir une Action :" << endl;
     cout << "1 : Ajouter un trajet au catalogue" << endl;
@@ -138,4 +137,4 @@ void Menu(Catalogue * catalogue)
         cout << "4 : Quitter" << endl;
         cin >> lecture;
     }
-}
+} //----- Fin de Menu

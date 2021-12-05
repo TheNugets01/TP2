@@ -23,15 +23,43 @@ class TrajetSimple : public Trajet
 
 public:
 //----------------------------------------------------- Méthodes publiques
+
+    void Afficher() const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+    void Afficher(int mode) const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+//----------------------------------------------------------------Getteur
+
     char * GetVilleDepart() const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
     char * GetVilleArrivee() const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
 //-------------------------------------------- Constructeurs - destructeur
     
     TrajetSimple (char * unDepart, char * uneArrivee, char * unTransport);
-    void Afficher() const;
-    void Afficher(int mode) const;
-
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
     virtual ~TrajetSimple ( );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
 //------------------------------------------------------------------ PRIVE
 

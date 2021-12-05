@@ -29,10 +29,30 @@ class Trajet
 
 public:
 //----------------------------------------------------- Méthodes publiques
-  virtual void Afficher() const = 0;
-  virtual void Afficher(int mode) const = 0;
-  virtual char * GetVilleDepart() const = 0;
-  virtual char * GetVilleArrivee() const = 0; // pas sur d'en avoir besoin dans trajet compose  
+
+    virtual void Afficher() const = 0;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+    virtual void Afficher(int mode) const = 0;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+//----------------------------------------------------------------Getteur
+
+    virtual char * GetVilleDepart() const = 0;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+    virtual char * GetVilleArrivee() const = 0;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -44,6 +64,7 @@ public:
 //------------------------------------------------------------------ PRIVE
 
 protected:
+
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés

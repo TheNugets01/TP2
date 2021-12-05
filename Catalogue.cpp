@@ -1,5 +1,5 @@
 /*************************************************************************
-                           Catalogue  -  implémente un Catalogue
+                           Catalogue  -  implemente un Catalogue
                              -------------------
     début                : 19/11/2021
     copyright            : (C) 2021 par Hugo Blaess & Octave Duvivier
@@ -18,7 +18,6 @@ using namespace std;
 //------------------------------------------------------ Include personnel
 
 #include "Catalogue.h"
-#include "Trajet.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -27,17 +26,23 @@ using namespace std;
 //----------------------------------------------------- Méthodes publiques
 
 void Catalogue::Inserer(Trajet * ainserer)
+// Algorithme : Permet d'inserer un trajet au catalogue !!(pour l'instant en fin)!!
+//
 {
     listeParcours->AjouterFin(ainserer);
-}
+} //----- Fin de Inserer
 
 void Catalogue::Afficher ()
+// Algorithme : Permet d'Afficher le contenu du Catalogue
+//
 {
     cout << "Voici notre Catalogue de Trajets :" << endl;
     listeParcours->Afficher();
-}
+} //----- Fin de Afficher
 
 void Catalogue::Rechercher (char * unDepart, char * uneArrivee)
+// Algorithme : Permet de rechercher un trajet dans le catalogue 
+//
 {
     cout << "Vous voulez voyager entre " << unDepart << " et " << uneArrivee <<  ", Voila nos propositions :" << endl;
     Trajet * temp;
@@ -56,11 +61,11 @@ void Catalogue::Rechercher (char * unDepart, char * uneArrivee)
     {
         temp->Afficher();
     }
-}
+} //----- Fin de Rechercher
 
 //-------------------------------------------- Constructeurs - destructeur
 Catalogue::Catalogue ()
-// Algorithme : Initialise le Catalogue
+// Algorithme : Initialise le Catalogue en creeant la liste chainee
 //
 {
 #ifdef MAP
@@ -69,18 +74,18 @@ Catalogue::Catalogue ()
 listeParcours = new ListeChainee();
 } 
 
-//----- Fin de maillon
+//----- Fin de Catalogue
 
 
 Catalogue::~Catalogue ( )
-// Algorithme : Détruit le Catalogue
+// Algorithme : Détruit le Catalogue 
 //
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Catalogue>" << endl;
 #endif
-delete listeParcours;
-} //----- Fin de ~Maillon
+delete listeParcours; // Son contenu est detruit en cascade par les autres destructeurs
+} //----- Fin de ~Catalogue
 
 
 //------------------------------------------------------------------ PRIVE
