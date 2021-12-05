@@ -1,0 +1,13 @@
+Liste de choses restantes à faire :
+
+- Finir l'ajout trié aux listes
+- Paramétrer le makefile pour pouvoir inclure MAP au lancement
+- Changer l'interface si tu trouves que des trucs sont pas pratique ou pas beau
+- Vérifier la cohérance de nos classes et méthodes (chaque chose au bon endroit, pas de répétition, pas d'algo chelou bricolé)
+- Vérifier les const
+- Vérifier qu'on respecte bien les squelettes de classes (Expliquer le role des classes dans l'entete, le mode d'emploi des methodes, map des constructeurs cf squelettes)
+- Commenter le code (ne pas abuser)
+
+
+- Faire le compte rendu
+
