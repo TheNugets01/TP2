@@ -36,7 +36,7 @@ public:
     //
     // Contrat :
     // Permet d'inserer un trajet au catalogue
-    void Afficher ();
+    void Afficher () const ;
     // Mode d'emploi :
     //
     // Contrat :

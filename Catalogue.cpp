@@ -32,7 +32,7 @@ void Catalogue::Inserer(Trajet * ainserer)
     listeParcours->AjouterFin(ainserer);
 } //----- Fin de Inserer
 
-void Catalogue::Afficher ()
+void Catalogue::Afficher () const
 // Algorithme : Permet d'Afficher le contenu du Catalogue
 //
 {
