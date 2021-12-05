@@ -22,7 +22,7 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-Trajet * Maillon::GetTrajet() const
+const Trajet * Maillon::GetTrajet() const
 // Algorithme : Permet d'accéder au trajet contenu par le maillon
 //
 {
@@ -33,7 +33,7 @@ Maillon * Maillon::GetProchain() const
 // Algorithme : Permet d'accéder au prochain maillon de la chaine
 //
 {
-  return Prochain;
+  return prochain;
 } //----- Fin de GetProchain
 
 void Maillon::SetTrajet( Trajet * unTrajet )
@@ -47,11 +47,11 @@ void Maillon::SetProchain( Maillon* unProchain )
 // Algorithme : Permet de modifier le prochain maillon de la chaine
 //
 {
-  Prochain = unProchain;
+  prochain = unProchain;
 } //----- Fin de SetProchain
 
 //-------------------------------------------- Constructeurs - destructeur
-Maillon::Maillon ( Trajet * contenu) : trajet(contenu),Prochain(nullptr)
+Maillon::Maillon ( Trajet * contenu) : trajet(contenu),prochain(nullptr)
 // Algorithme : Initialise le maillon avec la donnée et sans maillon suivant
 //
 {
@@ -69,9 +69,9 @@ Maillon::~Maillon ( )
       cout << "Appel au destructeur de <Maillon>" << endl;
   #endif
 
-  if ( Prochain != nullptr )
+  if ( prochain != nullptr )
   {
-    delete Prochain;
+    delete prochain;
   }
     delete trajet;
   

@@ -39,7 +39,7 @@ public:
     // Contrat :
     //
 //----------------------------------------------------------------Getteur
-    Trajet * GetTrajet() const;
+    const Trajet * GetTrajet() const;
     // Mode d'emploi :
     //
     // Contrat :
@@ -64,8 +64,8 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 //----------------------------------------------------- Attributs protégés
-    Trajet * trajet;
-    Maillon * Prochain;
+    const Trajet * trajet;
+    Maillon * prochain;
 
 };
 

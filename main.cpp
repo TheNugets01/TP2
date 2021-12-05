@@ -16,6 +16,8 @@ int main()
     cout << "Bienvenue dans notre Agence de Voyage" << endl;
     Catalogue * notreCatalogue = new Catalogue();
     Menu(notreCatalogue);
+    
+    
     /*Trajet * t1 = new TrajetSimple( Saisi() , Saisi() , Saisi() );
     Trajet * t2 = new TrajetSimple( Saisi(), Saisi() , Saisi() );
     notreCatalogue->Inserer(t1); 
@@ -32,6 +34,7 @@ int main()
     
     notreCatalogue -> Afficher();
     notreCatalogue -> Rechercher("a" , "z");*/
+    
     delete notreCatalogue;
 
     return 0;
@@ -40,18 +43,13 @@ int main()
 char * Saisi( )
 // Algorithme : Permet de saisir une chaine de caractère au clavier et de la ranger dans une zone alloué dynamiquement
 {
-    //char * unMot = "LA";
     char unMot[TAILLEBUFFER];
     cin >> unMot;
 
-    char * LeMot = new char[strlen(unMot)];
+    char * leMot = new char[strlen(unMot)+1];
+    strcpy( leMot , unMot );
 
-    for( int i = 0 ; i < int(strlen(unMot)) ; ++i)
-    {
-        LeMot[i] = unMot[i]; // ya strcpy aussi je crois
-    }
-
-    return LeMot;
+    return leMot;
 } //----- Fin de Saisi
 
 void Menu(Catalogue * catalogue)
@@ -59,10 +57,10 @@ void Menu(Catalogue * catalogue)
 //
 {
     cout << "Veuillez choisir une Action :" << endl;
-    cout << "1 : Ajouter un trajet au catalogue" << endl;
-    cout << "2 : Afficher le catalogue" << endl;
-    cout << "3 : Rechercher dans le cataloge " << endl;
-    cout << "4 : Quitter" << endl;
+    cout << "- 1 : Ajouter un trajet au catalogue" << endl;
+    cout << "- 2 : Afficher le catalogue" << endl;
+    cout << "- 3 : Rechercher dans le cataloge " << endl;
+    cout << "- 4 : Quitter" << endl << ">> ";
     int lecture;
     cin >> lecture;
     while (lecture!=4)
@@ -71,15 +69,15 @@ void Menu(Catalogue * catalogue)
         {
             bool estTC = false;
             ListeChainee * tc;
-            cout << "Veuillez indiquez votre Ville de depart" << endl;
+            cout << "Veuillez indiquez votre Ville de depart" << endl << ">> ";
             char * depart = Saisi();
-            cout << "Quel est la prochaine destination ?" << endl;
+            cout << "Quel est la prochaine destination ?" << endl << ">> ";
             char * arrive = Saisi();
-            cout << "Par quel moyen de transport ?" << endl;
+            cout << "Par quel moyen de transport ?" << endl << ">> ";
             char * transport = Saisi();
             Trajet * t1 = new TrajetSimple(depart,arrive,transport);
-            cout << "Quel est la prochaine destination ? (Si Fini tapez -1)" << endl;
-            depart = new char[strlen(arrive)];
+            cout << "Quel est la prochaine destination ? (Si Fini tapez -1)" << endl << ">> ";
+            depart = new char[ strlen(arrive) + 1 ];
             strcpy(depart,arrive);
             arrive = Saisi();
 
@@ -91,18 +89,24 @@ void Menu(Catalogue * catalogue)
                     tc->AjouterFin(t1);
                     estTC = true;
                 }
-                cout << "Par quel moyen de transport ?" << endl;
+                cout << "Par quel moyen de transport ?" << endl << ">> ";
                 transport = Saisi();
                 tc->AjouterFin(new TrajetSimple(depart,arrive,transport));
-                cout << "Quel est la prochaine destination ? (Si Fini tapez -1)" << endl;
-                depart = new char[strlen(arrive)];
+                cout << "Quel est la prochaine destination ? (Si Fini tapez -1)" << endl << ">> ";
+                depart = new char[ strlen(arrive) + 1 ];
                 strcpy(depart,arrive);
                 arrive = Saisi();
             }
+
             if(!estTC)
+            {
                 catalogue->Inserer(t1);
+            }
             else
+            {
                 catalogue->Inserer(new TrajetCompose(tc));
+            }
+
             delete[] arrive;
             delete[] depart;
         }
@@ -110,31 +114,34 @@ void Menu(Catalogue * catalogue)
         {
             catalogue -> Afficher();
             cout << endl;
-            cout << "Pour retourner au menu tapez un chiffre" << endl;
+            cout << "Pour retourner au menu tapez un chiffre" << endl << ">> ";
             int c;
             cin >> c;
         }
         else if (lecture==3)
         {
-            cout << "D'ou voulez vous partir ?" << endl;
-            char * depart = Saisi(); // Attention on ne delete jamais la Saisi !!! ////!!!\\\\\ Perte de mémoire
-            cout << "Pour arriver ou ?" << endl;
-            char * arrive = Saisi(); // Attention on ne delete jamais la Saisi !!! ////!!!\\\\\ Perte de mémoire
+            cout << "D'ou voulez vous partir ?" << endl << ">> ";
+            char * depart = Saisi(); // Perte de mémoire Regler
+            cout << "Pour arriver ou ?" << endl << ">> ";
+            char * arrive = Saisi(); // Perte de mémoire Regler
             catalogue -> Rechercher(depart,arrive);
             cout << endl;
-            cout << "Pour retourner au menu tapez un chiffre" << endl;
+            cout << "Pour retourner au menu tapez un chiffre" << endl << ">> ";
             int c;
             cin >> c;
         }
         else
         {
-            cout << "Je n'ai pas compris veuillez recommencer !" << endl;
+            cout << "Je n'ai pas compris veuillez recommencer !" << endl << ">> ";
+
+            while(getchar() != '\n'); //vider le buffer clavier en cas de mauvaise saisi
         }
-        cout << "Veuillez choisir une Action :" << endl;
+
+        cout << endl << "Veuillez choisir une Action :" << endl;
         cout << "1 : Ajouter un trajet au catalogue" << endl;
         cout << "2 : Afficher le catalogue" << endl;
         cout << "3 : Rechercher dans le cataloge " << endl;
-        cout << "4 : Quitter" << endl;
+        cout << "4 : Quitter" << endl << ">> ";
         cin >> lecture;
     }
 } //----- Fin de Menu

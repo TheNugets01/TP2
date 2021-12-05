@@ -29,7 +29,7 @@ void TrajetSimple::Afficher() const
 // Algorithme : Permet d'afficher le contenu du trajetsimple
 //
 {
-  cout << "Trajet Simple de : " << VilleDepart << " à " << VilleArrivee << " en " << MoyenTransport << endl;
+  cout << "Trajet Simple de : " << endl << " - " << VilleDepart << " à " << VilleArrivee << " en " << MoyenTransport << endl << endl;
 } //----- Fin de Afficher
 
 void TrajetSimple::Afficher(int mode) const

@@ -30,14 +30,10 @@ void TrajetCompose::Afficher() const
 {
   cout << "Trajet Composee de : " << endl;
   listeTrajets->Afficher(1);
+  cout << endl;
 } //----- Fin de Afficher
 
-void TrajetCompose::Afficher(int mode) const
-// Algorithme : Ici la surchage d'afficher ne sert a rien on redirige vers la methode initiale
-//
-{
-  Afficher();
-} //----- Fin de Afficher
+void TrajetCompose::Afficher(int mode) const {}
 
 //----------------------------------------------------------------Getteur
 
@@ -45,6 +41,10 @@ char * TrajetCompose::GetVilleDepart() const
 // Algorithme : Permet d'accéder a la ville de depart du trajet
 //
 {
+  #ifdef GETSET
+    cout << "Appel a GetVilleDepart de <TrajetCompose>" << endl;
+  #endif
+
   return listeTrajets->GetDebut()->GetTrajet()->GetVilleDepart();
 } //----- Fin de GetVilleDepart
 
@@ -52,6 +52,10 @@ char * TrajetCompose::GetVilleArrivee() const
 // Algorithme : Permet d'accéder a la ville d'arrive du trajet
 //
 {
+  #ifdef GETSET
+    cout << "Appel a GetVilleArrivee de <TrajetCompose>" << endl;
+  #endif
+
   return listeTrajets->GetFin()->GetTrajet()->GetVilleArrivee();
 } //----- Fin de GetVilleArrive
 
@@ -60,10 +64,10 @@ TrajetCompose::TrajetCompose (ListeChainee * trajets)
 // Algorithme : Initialise le TrajetCompose
 //
 {
-#ifdef MAP
-    cout << "Appel au constructeur de <TrajetCompose>" << endl;
-#endif
-listeTrajets = trajets;
+  #ifdef MAP
+      cout << "Appel au constructeur de <TrajetCompose>" << endl;
+  #endif
+  listeTrajets = trajets;
 } //----- Fin de TrajetCompose
 
 
@@ -71,10 +75,10 @@ TrajetCompose::~TrajetCompose ( )
 // Algorithme : Détruit le TrajetCompose
 //
 {
-#ifdef MAP
-    cout << "Appel au destructeur de <TrajetCompose>" << endl;
-#endif
-delete listeTrajets;
+  #ifdef MAP
+      cout << "Appel au destructeur de <TrajetCompose>" << endl;
+  #endif
+  delete listeTrajets;
 } //----- Fin de ~TrajetCompose
 
 

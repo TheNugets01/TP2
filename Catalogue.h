@@ -31,7 +31,7 @@ class Catalogue
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void Inserer(Trajet * unTrajet);
+    void Inserer( Trajet * unTrajet);
     // Mode d'emploi :
     //
     // Contrat :
@@ -41,7 +41,7 @@ public:
     //
     // Contrat :
     // Permet d'afficher le contenu du catalogue
-    void Rechercher (char * depart, char * arrivee);
+    void Rechercher (const char * depart, const char * arrivee);
     // Mode d'emploi :
     //
     // Contrat :

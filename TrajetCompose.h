@@ -37,7 +37,8 @@ public:
     //
     // Contrat :
     //
-    void Afficher(int mode) const;
+
+    void Afficher(int) const;
     // Mode d'emploi :
     //
     // Contrat :

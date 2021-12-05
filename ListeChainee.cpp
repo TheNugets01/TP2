@@ -21,6 +21,25 @@ using namespace std;
 //------------------------------------------------------------------PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
+void NouveauEnSuite(  Trajet * contenu , Maillon * actuelle )
+{
+  Maillon * nouveau = new Maillon(contenu);
+  nouveau -> SetTrajet(contenu);
+  
+  Maillon * MemSuivant = actuelle->GetProchain();
+
+  nouveau -> SetProchain( MemSuivant );
+  actuelle -> SetProchain( nouveau );
+}
+
+Maillon * NouveauEnDebut( Trajet * contenu , Maillon * actuelle ,  Maillon * debut )
+{
+  Maillon * nouveau = new Maillon(contenu);
+  nouveau -> SetTrajet(contenu);
+  nouveau -> SetProchain(actuelle);
+  return debut = nouveau;
+}
+
 Maillon * ListeChainee::GetDebut() const
 // Algorithme : Permet d'accéder au premier maillon de la liste
 //
@@ -36,35 +55,67 @@ Maillon * ListeChainee::GetFin() const
 } //----- Fin de GetFin
 
 void ListeChainee::AjouterTri( Trajet * contenu)
-// Algorithme : Permet d'ajouter un trajet à la liste en triant par ordre alphabétique de la ville de depart
+// Algorithme : Permet d'ajouter un trajet à la liste en triant d'abord par ordre alphabétique de la ville de depart puis d'arrivée
 //
 {
-  
+  #ifdef MAP
+      cout << "Appel a la fonction AjouterTri de <ListeChainee>" << endl;
+  #endif
+
   if(debut == nullptr)
+  //Si la chaine est vide
   {
     debut = new Maillon(contenu);
   }
+  else if( debut->GetProchain() == nullptr )
+  //Si il n'y a qu'un seul Maillon
+  {
+    Maillon * actuelle = debut;
+
+    if((actuelle->GetTrajet()->GetVilleDepart())[0] > (contenu->GetVilleDepart())[0])
+    //Si l'ajout se trie avant le debut par rapport a la ville de depart
+    {
+      debut = NouveauEnDebut(contenu , actuelle , debut );
+    }
+    else if( (actuelle->GetTrajet()->GetVilleDepart())[0] == (contenu->GetVilleDepart())[0] && (actuelle->GetTrajet()->GetVilleArrivee())[0] > (contenu->GetVilleArrivee())[0])
+    //Si l'ajout se trie avant le debut par rapport a la ville d'arrivée
+    {
+      debut = NouveauEnDebut(contenu , actuelle , debut );
+    }
+    else
+    {
+      NouveauEnSuite( contenu , actuelle );
+    }
+  }
   else
   {
-
     Maillon * actuelle = debut;
-    //Trie par ordre alphabetique
-    if( actuelle -> GetProchain() != nullptr)
+    while ( actuelle -> GetProchain() != nullptr && ( (actuelle->GetProchain()->GetTrajet()->GetVilleDepart())[0] < (contenu->GetVilleDepart())[0] ) )
+    //Positionement par rapport a la ville de depart
+    { 
+      actuelle = actuelle -> GetProchain();
+    }
+
+    if( (actuelle->GetProchain()->GetTrajet()->GetVilleDepart())[0] == (contenu->GetVilleDepart())[0] )
+    //Si premiere lettre equivalente
     {
-      while ( ( actuelle->GetProchain()->GetTrajet()->GetVilleDepart() )[0] < (contenu->GetVilleDepart())[0] )
+      while( actuelle -> GetProchain() != nullptr && ( (actuelle->GetProchain()->GetTrajet()->GetVilleArrivee())[0] < (contenu->GetVilleArrivee())[0] ) )
+      //Positionement par rapport a la ville d'arrivée
       { 
         actuelle = actuelle -> GetProchain();
       }
     }
 
 
-    Maillon * nouveau = new Maillon(contenu);
-    nouveau -> SetTrajet(contenu);
-    
-    Maillon * MemSuivant = actuelle->GetProchain();
-
-    nouveau -> SetProchain( MemSuivant );
-    actuelle -> SetProchain( nouveau );
+    if(debut == actuelle)
+    //Si l'ajout se trie avant le debut
+    {
+      debut = NouveauEnDebut(contenu , actuelle , debut );
+    }
+    else
+    {
+      NouveauEnSuite( contenu , actuelle );
+    }
   }
 } //----- Fin de AjouterTri
 
@@ -72,6 +123,9 @@ void ListeChainee::AjouterFin( Trajet * contenu)
 // Algorithme : Permet d'ajouter un trajet en fin de liste
 //
 {
+  #ifdef MAP
+      cout << "Appel a la fonction AjouterFin de <ListeChainee>" << endl;
+  #endif
   
   if(debut == nullptr)
   {
@@ -90,6 +144,10 @@ void ListeChainee::Afficher () const
 // Algorithme : Permet d'afficher tous les trajets de la liste 
 //
 {
+  #ifdef MAP
+      cout << "Appel a la fonction Afficher() de <ListeChainee>" << endl;
+  #endif
+
   Maillon * courant = debut;
   while( courant->GetProchain() != nullptr )
   {
@@ -103,6 +161,10 @@ void ListeChainee::Afficher (int mode) const
 // Algorithme : Permet d'adapter l'affichage des trajets simple etant dans les trajets compose
 //
 {
+  #ifdef MAP
+      cout << "Appel a la fonction Afficher(int) de <ListeChainee>" << endl;
+  #endif
+
   Maillon * courant = debut;
   while( courant->GetProchain() != nullptr )
   {

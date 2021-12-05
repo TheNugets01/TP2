@@ -25,11 +25,11 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-void Catalogue::Inserer(Trajet * ainserer)
+void Catalogue::Inserer( Trajet * aInserer)
 // Algorithme : Permet d'inserer un trajet au catalogue !!(pour l'instant en fin)!!
 //
 {
-    listeParcours->AjouterFin(ainserer);
+    listeParcours->AjouterTri(aInserer);
 } //----- Fin de Inserer
 
 void Catalogue::Afficher () const
@@ -40,38 +40,44 @@ void Catalogue::Afficher () const
     listeParcours->Afficher();
 } //----- Fin de Afficher
 
-void Catalogue::Rechercher (char * unDepart, char * uneArrivee)
+void Catalogue::Rechercher ( const char * unDepart, const char * uneArrivee)
 // Algorithme : Permet de rechercher un trajet dans le catalogue 
 //
 {
     cout << "Vous voulez voyager entre " << unDepart << " et " << uneArrivee <<  ", Voila nos propositions :" << endl;
-    Trajet * temp;
+    const Trajet * temp;
     Maillon * courant = listeParcours->GetDebut();
-  while( courant->GetProchain() != nullptr )
-  {
+
+    while( courant->GetProchain() != nullptr )
+    {
     temp = courant -> GetTrajet();
     if(strcmp(temp->GetVilleDepart(),unDepart)==0 && strcmp(temp->GetVilleArrivee(),uneArrivee)==0)
     {
         temp->Afficher();
     }
     courant = courant->GetProchain();
-  }
-  temp = courant -> GetTrajet();
+    }
+    
+    temp = courant -> GetTrajet();
     if(strcmp(temp->GetVilleDepart(),unDepart)==0 && strcmp(temp->GetVilleArrivee(),uneArrivee)==0)
     {
         temp->Afficher();
     }
+
+    delete[] unDepart;
+    delete[] uneArrivee;
 } //----- Fin de Rechercher
 
 //-------------------------------------------- Constructeurs - destructeur
 Catalogue::Catalogue ()
 // Algorithme : Initialise le Catalogue en creeant la liste chainee
 //
-{
-#ifdef MAP
-    cout << "Appel au constructeur de <Catalogue>" << endl;
-#endif
-listeParcours = new ListeChainee();
+    {
+    #ifdef MAP
+        cout << "Appel au constructeur de <Catalogue>" << endl;
+    #endif
+
+    listeParcours = new ListeChainee();
 } 
 
 //----- Fin de Catalogue
@@ -81,12 +87,12 @@ Catalogue::~Catalogue ( )
 // Algorithme : Détruit le Catalogue 
 //
 {
-#ifdef MAP
-    cout << "Appel au destructeur de <Catalogue>" << endl;
-#endif
-delete listeParcours; // Son contenu est detruit en cascade par les autres destructeurs
-} //----- Fin de ~Catalogue
+    #ifdef MAP
+        cout << "Appel au destructeur de <Catalogue>" << endl;
+    #endif
 
+    delete listeParcours; // Son contenu est detruit en cascade par les autres destructeurs
+} //----- Fin de ~Catalogue
 
 //------------------------------------------------------------------ PRIVE
 

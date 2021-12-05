@@ -1,12 +1,15 @@
 EXTFLAGS = -ansi -pedantic -Wall -std=c++11
 
-all: main
+all: sejours
 
 MAP: EXTFLAGS += -DMAP
-MAP: main
+MAP: sejours
 
-main : Catalogue.o ListeChainee.o Maillon.o Trajet.o  TrajetSimple.o TrajetCompose.o main.o 
-		g++ -o main Catalogue.o ListeChainee.o Maillon.o Trajet.o TrajetSimple.o TrajetCompose.o main.o $(EXTFLAGS)
+GETSET: EXTFLAGS += -DGETSET
+GETSET: sejours
+
+sejours : Catalogue.o ListeChainee.o Maillon.o Trajet.o  TrajetSimple.o TrajetCompose.o main.o 
+		g++ -o sejours Catalogue.o ListeChainee.o Maillon.o Trajet.o TrajetSimple.o TrajetCompose.o main.o $(EXTFLAGS)
 
 Catalogue.o : Catalogue.cpp
 		g++ -c -g $(EXTFLAGS) Catalogue.cpp
