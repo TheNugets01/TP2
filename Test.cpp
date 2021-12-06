@@ -2,16 +2,16 @@
 #include <cstring>
 using namespace std;
 
-char fun(char * c)
-{
-    return c[0];
-}
+#define carl "yo"
+
 
 int main()
 {
-    char * k = "manger";
-    cout << fun(k) << endl;
+    
+    if( strcmp("A","Bonjour") < 0 )
+    {  
+        cout << carl << endl;
+    }
 
     return 0;
-
 }

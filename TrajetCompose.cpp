@@ -28,12 +28,17 @@ void TrajetCompose::Afficher() const
 // Algorithme : Permet d'Afficher le TrajetCompose
 //
 {
+  #ifdef MAP
+      cout << "Appel a l'Afficheur() <TrajetCompose>" << endl;
+  #endif
+
   cout << "Trajet Composee de : " << endl;
   listeTrajets->Afficher(1);
   cout << endl;
 } //----- Fin de Afficher
 
 void TrajetCompose::Afficher(int mode) const {}
+// Definition necessaire a cause de la méthode virtual pure de Trajet
 
 //----------------------------------------------------------------Getteur
 
@@ -78,6 +83,7 @@ TrajetCompose::~TrajetCompose ( )
   #ifdef MAP
       cout << "Appel au destructeur de <TrajetCompose>" << endl;
   #endif
+  
   delete listeTrajets;
 } //----- Fin de ~TrajetCompose
 

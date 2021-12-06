@@ -12,6 +12,7 @@
 
 //-------------------------------------------------------- Include système
 #include <iostream>
+#include <cstring>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
@@ -72,12 +73,12 @@ void ListeChainee::AjouterTri( Trajet * contenu)
   {
     Maillon * actuelle = debut;
 
-    if((actuelle->GetTrajet()->GetVilleDepart())[0] > (contenu->GetVilleDepart())[0])
+    if( strcmp( actuelle->GetTrajet()->GetVilleDepart() ,  contenu->GetVilleDepart()) > 0 )
     //Si l'ajout se trie avant le debut par rapport a la ville de depart
     {
       debut = NouveauEnDebut(contenu , actuelle , debut );
     }
-    else if( (actuelle->GetTrajet()->GetVilleDepart())[0] == (contenu->GetVilleDepart())[0] && (actuelle->GetTrajet()->GetVilleArrivee())[0] > (contenu->GetVilleArrivee())[0])
+    else if( strcmp(actuelle->GetTrajet()->GetVilleDepart(), contenu->GetVilleDepart()) == 0 && strcmp(actuelle->GetTrajet()->GetVilleArrivee() , contenu->GetVilleArrivee()) > 0)
     //Si l'ajout se trie avant le debut par rapport a la ville d'arrivée
     {
       debut = NouveauEnDebut(contenu , actuelle , debut );
@@ -90,22 +91,21 @@ void ListeChainee::AjouterTri( Trajet * contenu)
   else
   {
     Maillon * actuelle = debut;
-    while ( actuelle -> GetProchain() != nullptr && ( (actuelle->GetProchain()->GetTrajet()->GetVilleDepart())[0] < (contenu->GetVilleDepart())[0] ) )
+    while ( actuelle -> GetProchain() != nullptr && ( strcmp(actuelle->GetProchain()->GetTrajet()->GetVilleDepart() , contenu->GetVilleDepart()) < 0 ) )
     //Positionement par rapport a la ville de depart
     { 
       actuelle = actuelle -> GetProchain();
     }
 
-    if( (actuelle->GetProchain()->GetTrajet()->GetVilleDepart())[0] == (contenu->GetVilleDepart())[0] )
-    //Si premiere lettre equivalente
+    if( strcmp(actuelle->GetProchain()->GetTrajet()->GetVilleDepart() , contenu->GetVilleDepart()) == 0 )
+    //Si depart identique
     {
-      while( actuelle -> GetProchain() != nullptr && ( (actuelle->GetProchain()->GetTrajet()->GetVilleArrivee())[0] < (contenu->GetVilleArrivee())[0] ) )
+      while( actuelle -> GetProchain() != nullptr && ( strcmp(actuelle->GetProchain()->GetTrajet()->GetVilleArrivee() , contenu->GetVilleArrivee()) < 0 ) )
       //Positionement par rapport a la ville d'arrivée
       { 
         actuelle = actuelle -> GetProchain();
       }
     }
-
 
     if(debut == actuelle)
     //Si l'ajout se trie avant le debut

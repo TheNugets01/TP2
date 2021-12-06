@@ -44,28 +44,44 @@ void Catalogue::Rechercher ( const char * unDepart, const char * uneArrivee)
 // Algorithme : Permet de rechercher un trajet dans le catalogue 
 //
 {
-    cout << "Vous voulez voyager entre " << unDepart << " et " << uneArrivee <<  ", Voila nos propositions :" << endl;
-    const Trajet * temp;
-    Maillon * courant = listeParcours->GetDebut();
-
-    while( courant->GetProchain() != nullptr )
+    if( listeParcours->GetDebut() != nullptr )
+    // verifie que la liste n'est pas vide
     {
-    temp = courant -> GetTrajet();
-    if(strcmp(temp->GetVilleDepart(),unDepart)==0 && strcmp(temp->GetVilleArrivee(),uneArrivee)==0)
-    {
-        temp->Afficher();
-    }
-    courant = courant->GetProchain();
-    }
+        bool Affichage = false;
+        const Trajet * temp;
+        Maillon * courant = listeParcours->GetDebut();
     
-    temp = courant -> GetTrajet();
-    if(strcmp(temp->GetVilleDepart(),unDepart)==0 && strcmp(temp->GetVilleArrivee(),uneArrivee)==0)
-    {
-        temp->Afficher();
-    }
+        while( courant != nullptr )
+        {
+            temp = courant -> GetTrajet();
+            if(strcmp(temp->GetVilleDepart() , unDepart) == 0 && strcmp( temp->GetVilleArrivee() , uneArrivee ) == 0 )
+            {
+                if(Affichage == false)
+                {
+                    cout << "Vous voulez voyager entre " << unDepart << " et " << uneArrivee <<  ", Voila nos propositions :" << endl;
+                    Affichage = true;
+                }
 
-    delete[] unDepart;
-    delete[] uneArrivee;
+                temp->Afficher();
+            }
+            courant = courant->GetProchain();
+        }
+
+        if( Affichage == false )
+        {
+            cout << "Nous n'avons pas trouvé de trajet corespondant dans le catalogue" << endl;
+        }
+
+        delete[] unDepart;
+        delete[] uneArrivee;
+    }
+    else
+    {
+        cout << "Votre Catalogue est vide" << endl;
+
+        delete[] unDepart;
+        delete[] uneArrivee;
+    }
 } //----- Fin de Rechercher
 
 //-------------------------------------------- Constructeurs - destructeur

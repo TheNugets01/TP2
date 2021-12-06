@@ -7,13 +7,14 @@
 using namespace std;
 
 #define TAILLEBUFFER 100
+#define VIDEBUFFERCLAVIER() char ch; while( (ch = getchar() != '\n') && ch != EOF );
 
 char * Saisi(  );
 void Menu(Catalogue * catalogue);
 
 int main()
 {
-    cout << "Bienvenue dans notre Agence de Voyage" << endl;
+    cout << "----- Bienvenue dans notre Agence de Voyage -----" << endl;
     Catalogue * notreCatalogue = new Catalogue();
     Menu(notreCatalogue);
     
@@ -48,25 +49,31 @@ char * Saisi( )
 
     char * leMot = new char[strlen(unMot)+1];
     strcpy( leMot , unMot );
-
+    
+    if(strcmp(leMot,"-1") != 0)
+    {
+        VIDEBUFFERCLAVIER();
+    }
+    
     return leMot;
 } //----- Fin de Saisi
 
 void Menu(Catalogue * catalogue)
 // Algorithme : Permet d'afficher le menu et de gerer les interactions avec l'utilisateur
 //
-{
+{   
+    char lecture;
     cout << "Veuillez choisir une Action :" << endl;
     cout << "- 1 : Ajouter un trajet au catalogue" << endl;
     cout << "- 2 : Afficher le catalogue" << endl;
     cout << "- 3 : Rechercher dans le cataloge " << endl;
     cout << "- 4 : Quitter" << endl << ">> ";
-    int lecture;
     cin >> lecture;
-    while (lecture!=4)
+    while (lecture != '4')
     {
-        if (lecture==1) // Desfois quand on affiche les trajets il affiche des caractères chelou jsp pk surement un problème d'accès a la mémoire 
+        if (lecture== '1')
         {
+            VIDEBUFFERCLAVIER();
             bool estTC = false;
             ListeChainee * tc;
             cout << "Veuillez indiquez votre Ville de depart" << endl << ">> ";
@@ -91,7 +98,7 @@ void Menu(Catalogue * catalogue)
                 }
                 cout << "Par quel moyen de transport ?" << endl << ">> ";
                 transport = Saisi();
-                tc->AjouterFin(new TrajetSimple(depart,arrive,transport));
+                tc->AjouterFin( new TrajetSimple(depart,arrive,transport) );
                 cout << "Quel est la prochaine destination ? (Si Fini tapez -1)" << endl << ">> ";
                 depart = new char[ strlen(arrive) + 1 ];
                 strcpy(depart,arrive);
@@ -110,39 +117,40 @@ void Menu(Catalogue * catalogue)
             delete[] arrive;
             delete[] depart;
         }
-        else if (lecture==2)
+        else if (lecture== '2')
         {
+            VIDEBUFFERCLAVIER();
             catalogue -> Afficher();
             cout << endl;
-            cout << "Pour retourner au menu tapez un chiffre" << endl << ">> ";
+            cout << "Pour retourner au menu tapez un nombre" << endl << ">> ";
             int c;
             cin >> c;
+            
         }
-        else if (lecture==3)
+        else if (lecture== '3')
         {
+            VIDEBUFFERCLAVIER();
             cout << "D'ou voulez vous partir ?" << endl << ">> ";
-            char * depart = Saisi(); // Perte de mémoire Regler
+            char * depart = Saisi();
             cout << "Pour arriver ou ?" << endl << ">> ";
-            char * arrive = Saisi(); // Perte de mémoire Regler
+            char * arrive = Saisi();
             catalogue -> Rechercher(depart,arrive);
             cout << endl;
-            cout << "Pour retourner au menu tapez un chiffre" << endl << ">> ";
+            cout << "Pour retourner au menu tapez un nombre" << endl << ">> ";
             int c;
             cin >> c;
         }
         else
         {
-            cout << "Je n'ai pas compris veuillez recommencer !" << endl << ">> ";
-
-            
+            cout << "Je n'ai pas compris veuillez recommencer !" << endl;
         }
 
-        while(getchar() != '\n'); //vider le buffer clavier en cas de mauvaise saisi
+        VIDEBUFFERCLAVIER();
         cout << endl << "Veuillez choisir une Action :" << endl;
         cout << "1 : Ajouter un trajet au catalogue" << endl;
         cout << "2 : Afficher le catalogue" << endl;
         cout << "3 : Rechercher dans le cataloge " << endl;
-        cout << "4 : Quitter" << endl << ">> ";
+        cout << "4 : Quitter" << endl << ">>";
         cin >> lecture;
     }
 } //----- Fin de Menu
