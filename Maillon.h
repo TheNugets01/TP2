@@ -1,5 +1,5 @@
 /*************************************************************************
-                           Maillon  -  interface de la classe Maillon
+                           Maillon  -  Interface de la classe Maillon
                              -------------------
     début                : 19/11/2021
     copyright            : (C) 2021 par Hugo Blaess & Octave Duvivier
@@ -18,8 +18,7 @@
 
 //------------------------------------------------------------------ Types
 // Rôle de la classe <Maillon>
-//
-// Maillon sert à implémenter la liste chainee
+// Maillon est un element de la liste chainee
 
 class Maillon
 {
@@ -30,36 +29,24 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
     Maillon ( Trajet * contenu);
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Construit un maillon à partir du trajet qu'il doit contenir
     virtual ~Maillon ( );
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Détruit le maillon
 //----------------------------------------------------------------Getteur
     const Trajet * GetTrajet() const;
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Renvoie le trajet contenu par le maillon
     Maillon * GetProchain() const;
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Renvoie le maillon suivant
 //----------------------------------------------------------------Setteur
     void SetTrajet( Trajet * unTrajet );
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Modifie le trajet contenu par le maillon
     void SetProchain( Maillon * unProchain);
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Modifie le pointeur vers le maillon suivant
 
 protected:
 //----------------------------------------------------- Méthodes protégées

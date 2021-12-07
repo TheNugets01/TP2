@@ -7,7 +7,7 @@
 using namespace std;
 
 #define TAILLEBUFFER 100
-#define VIDEBUFFERCLAVIER() char ch; while( (ch = getchar() != '\n') && ch != EOF );
+#define VIDEBUFFERCLAVIER() char ch; while( (ch = getchar() != '\n') && ch != EOF ); // Ameliore l'affichage
 
 char * Saisi(  );
 void Menu(Catalogue * catalogue);
@@ -17,32 +17,13 @@ int main()
     cout << "----- Bienvenue dans notre Agence de Voyage -----" << endl;
     Catalogue * notreCatalogue = new Catalogue();
     Menu(notreCatalogue);
-    
-    
-    /*Trajet * t1 = new TrajetSimple( Saisi() , Saisi() , Saisi() );
-    Trajet * t2 = new TrajetSimple( Saisi(), Saisi() , Saisi() );
-    notreCatalogue->Inserer(t1); 
-    notreCatalogue->Inserer(t2);
-
-    ListeChainee * test2 = new ListeChainee();
-    Trajet * t3 = new TrajetSimple(Saisi() , Saisi() , Saisi());
-    Trajet * t4 = new TrajetSimple(Saisi() , Saisi() , Saisi());
-    test2->AjouterFin(t3);
-    test2->AjouterFin(t4);
-
-    Trajet * t5 = new TrajetCompose(test2);
-    notreCatalogue->Inserer(t5);
-    
-    notreCatalogue -> Afficher();
-    notreCatalogue -> Rechercher("a" , "z");*/
-    
     delete notreCatalogue;
 
     return 0;
 }
 
 char * Saisi( )
-// Algorithme : Permet de saisir une chaine de caractère au clavier et de la ranger dans une zone alloué dynamiquement
+// Permet de saisir une chaine de caractère au clavier et de la ranger dans une zone alloué dynamiquement
 {
     char unMot[TAILLEBUFFER];
     cin >> unMot;
@@ -59,8 +40,7 @@ char * Saisi( )
 } //----- Fin de Saisi
 
 void Menu(Catalogue * catalogue)
-// Algorithme : Permet d'afficher le menu et de gerer les interactions avec l'utilisateur
-//
+// Permet d'afficher le menu et de gerer les interactions avec l'utilisateur
 {   
     char lecture;
     cout << "Veuillez choisir une Action :" << endl;
@@ -76,6 +56,9 @@ void Menu(Catalogue * catalogue)
             VIDEBUFFERCLAVIER();
             bool estTC = false;
             ListeChainee * tc;
+            
+            // On recolte les informations du premier trajet
+
             cout << "Veuillez indiquez votre Ville de depart" << endl << ">> ";
             char * depart = Saisi();
             cout << "Quel est la prochaine destination ?" << endl << ">> ";
@@ -83,14 +66,17 @@ void Menu(Catalogue * catalogue)
             cout << "Par quel moyen de transport ?" << endl << ">> ";
             char * transport = Saisi();
             Trajet * t1 = new TrajetSimple(depart,arrive,transport);
+
             cout << "Quel est la prochaine destination ? (Si Fini tapez -1)" << endl << ">> ";
             depart = new char[ strlen(arrive) + 1 ];
             strcpy(depart,arrive);
             arrive = Saisi();
 
+            // Si il y en a d'autres c'est donc un TC -> on rentre dans le while
+
             while(strcmp(arrive,"-1")!=0)
             {
-                if(!estTC)
+                if(!estTC) // Si premiere fois qu'on rentre dans le while on initialise la liste et on insere le premier trajet
                 {
                     tc = new ListeChainee();
                     tc->AjouterFin(t1);
@@ -99,23 +85,27 @@ void Menu(Catalogue * catalogue)
                 cout << "Par quel moyen de transport ?" << endl << ">> ";
                 transport = Saisi();
                 tc->AjouterFin( new TrajetSimple(depart,arrive,transport) );
+
+                // on demande le prochain trajet à la fin du while pour savoir si on continue ou pas
+
                 cout << "Quel est la prochaine destination ? (Si Fini tapez -1)" << endl << ">> ";
                 depart = new char[ strlen(arrive) + 1 ];
                 strcpy(depart,arrive);
                 arrive = Saisi();
             }
 
-            if(!estTC)
+            if(!estTC) // Si il n'y avait qu'un trajet on insere le premier trajet dans le catalogue
             {
                 catalogue->Inserer(t1);
             }
-            else
+            else // Sinon on insere le trajet composee de la liste creer dans le while
             {
                 catalogue->Inserer(new TrajetCompose(tc));
             }
 
-            delete[] arrive;
+            delete[] arrive; // A la fin on delete nos pointeurs de depart et d'arrive que l'on a initialise mais pas utilise
             delete[] depart;
+            // pas de delete sur le moyen de transport car on les a mis dans un trajet
         }
         else if (lecture== '2')
         {

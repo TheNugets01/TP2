@@ -29,47 +29,31 @@ public:
 //--------------------------- Méthodes publiques
     void AjouterTri( Trajet * contenu);
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Ajout d'un trajet dans la liste par ordre alphabétique de la ville de départ
     void AjouterFin( Trajet * contenu);
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Ajout d'un Trajet en fin de liste
     void Afficher () const;
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Affiche le contenu de la liste
     void Afficher (int mode) const;
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Surcharge permettant d'adapter l'affichage des trajets simple au sein d'un trajet compose
 //----------------------------------------------------------------Getteur
     Maillon * GetDebut() const;
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Renvoie le premier maillon de la liste
     Maillon * GetFin() const;
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Renvoie le dernier maillon de la liste
 
 //---- Constructeurs - destructeur
     ListeChainee ( );
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Construit la liste chainee
     virtual ~ListeChainee ( );
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Detruit la liste chainee
 
 protected:
 //------------ Méthodes protégées

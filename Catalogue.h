@@ -1,5 +1,5 @@
 /*************************************************************************
-                           Catalogue  -  interface de la classe Catalogue
+                           Catalogue  -  Interface de la classe Catalogue
                              -------------------
     début                : 19/11/2021
     copyright            : (C) 2021 par Hugo Blaess & Octave Duvivier
@@ -21,7 +21,7 @@
 //------------------------------------------------------------------------
 // Rôle de la classe <Catalogue>
 //
-// Catalogue sert à implémenter un Catalogue
+// Catalogue sert à lister tous les trajets existant puis à les manipuler via les méthodes d'insertion, d'affichage ou de recherche
 //
 //------------------------------------------------------------------------
 
@@ -33,35 +33,23 @@ public:
 //----------------------------------------------------- Méthodes publiques
     void Inserer( Trajet * unTrajet);
     // Mode d'emploi :
-    //
-    // Contrat :
-    // Permet d'inserer un trajet au catalogue
+    // Permet d'insérer un Trajet au catalogue en le triant par ordre alphabétique
     void Afficher () const ;
     // Mode d'emploi :
-    //
-    // Contrat :
-    // Permet d'afficher le contenu du catalogue
+    // Affiche le contenu courant du catalogue
     void Rechercher (const char * depart, const char * arrivee);
     // Mode d'emploi :
-    //
-    // Contrat :
-    // Permet de chercher un trajet
-
-
+    // Permet de rechercher un trajet par ville de départ et d'arriver
 
 //-------------------------------------------- Constructeurs - destructeur
 
     Catalogue ();
-    // Mode d'emploi : Donne en paramètre le contenu du Catalogue 
-    //
-    // Contrat :
-    // Créer le Catalogue
+    // Mode d'emploi :
+    // Construit le catalogue
 
     virtual ~Catalogue ( );
     // Mode d'emploi :
-    //
-    // Contrat :
-    // Détruit le Catalogue
+    // Détruit le catalogue
 
 //------------------------------------------------------------------ PRIVE
 
