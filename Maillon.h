@@ -7,8 +7,8 @@
 *************************************************************************/
 
 //---------- Interface de la classe <Maillon> (fichier Maillon.h) ----------------
-#if ! defined ( XXX_H )
-#define XXX_H
+#if ! defined ( MAILLON_H )
+#define MAILLON_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -27,23 +27,47 @@ class Maillon
 
 public:
 //----------------------------------------------------- Méthodes publiques
+//-----------------------------------------------Getteur
+    const Trajet * GetTrajet() const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+    Maillon * GetProchain() const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+//-----------------------------------------------Setteur
+    void SetTrajet( Trajet * unTrajet );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+    void SetProchain( Maillon * unProchain);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 //-------------------------------------------- Constructeurs - destructeur
-    Maillon (Trajet * contenu);
+    Maillon ( Trajet * contenu);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
     virtual ~Maillon ( );
-//----------------------------------------------------------------Getteur
-Trajet * GetDonnee() const;
-Maillon * GetProchain() const;
-//----------------------------------------------------------------Setteur
-void SetDonnee( Trajet * uneDonnee );
-void SetProchain( Maillon * unProchain);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
 protected:
 //----------------------------------------------------- Méthodes protégées
 //----------------------------------------------------- Attributs protégés
-Trajet * donnee;
-Maillon * prochain;
+    const Trajet * trajet;
+    Maillon * prochain;
 
 };
 
-#endif // XXX_H
+#endif // MAILLON_H
 

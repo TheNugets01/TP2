@@ -1,5 +1,5 @@
 /*************************************************************************
-                           TrajetSimple  -  implémente un TrajetSimple
+                           TrajetSimple  -  implemente un TrajetSimple
                              -------------------
     début                : 19/11/2021
     copyright            : (C) 2021 par Hugo Blaess & Octave Duvivier
@@ -25,26 +25,46 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-void TrajetSimple::Afficher() const
+void TrajetSimple::Afficher( int mode ) const
+// Algorithme : Permet d'afficher le contenu du trajetsimple
+//
 {
-  cout << "Trajet Simple de : " << villeDepart << ", jusqu'a " << villeArrivee << " en utilisant le " << moyenTransport << endl;
-}
+  if( mode == 0 )
+  {
+    cout << "Trajet Simple de : " << endl << " - " << VilleDepart << " à " << VilleArrivee << " en " << MoyenTransport << endl << endl;
+  }
+  else if ( mode == 1 )
+  {
+    cout << " - " << VilleDepart << " à " << VilleArrivee << " en " << MoyenTransport << endl;
+  }
+} //----- Fin de Afficher
+
+//----------------------------------------------------------------Getteur
+
+char * TrajetSimple::GetVilleDepart() const
+// Algorithme : Permet d'accéder a la ville de depart du trajet
+//
+{
+  return VilleDepart;
+} //----- Fin de GetVilleDepart
+char * TrajetSimple::GetVilleArrivee() const
+// Algorithme : Permet d'accéder a la ville d'arrive du trajet
+//
+{
+  return VilleArrivee;
+} //----- Fin de GetVilleArrivee
 
 //-------------------------------------------- Constructeurs - destructeur
-TrajetSimple::TrajetSimple (const char* depart, const char* arrivee, const char* transport) : Trajet(depart,arrivee)
+TrajetSimple::TrajetSimple (char * unDepart, char * uneArrivee, char * unTransport)
 // Algorithme : Initialise le TrajetSimple
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetSimple>" << endl;
 #endif
-
-  //Evite le Segmentation Fault car char * moyenTransport initialement aléatoire
-  char Transport[sizeof(transport)];
-  moyenTransport = Transport;
-  
-  for(int i=0; i < sizeof(transport) ; ++i)
-    moyenTransport[i] = transport[i];
+  VilleDepart = unDepart;
+  VilleArrivee = uneArrivee;
+  MoyenTransport = unTransport;
 } //----- Fin de TrajetSimple
 
 
@@ -55,6 +75,9 @@ TrajetSimple::~TrajetSimple ( )
 #ifdef MAP
     cout << "Appel au destructeur de <TrajetSimple>" << endl;
 #endif
+  delete[] VilleDepart;
+  delete[] VilleArrivee;
+  delete[] MoyenTransport;
 } //----- Fin de ~TrajetSimple
 
 

@@ -1,5 +1,5 @@
 /*************************************************************************
-                           TrajetCompose  -  implémente un TrajetCompose
+                           TrajetCompose  -  implemente un TrajetCompose
                              -------------------
     début                : 19/11/2021
     copyright            : (C) 2021 par Hugo Blaess & Octave Duvivier
@@ -24,20 +24,54 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-void TrajetCompose::Afficher() const
+void TrajetCompose::Afficher( int mode ) const
+// Algorithme : Permet d'Afficher le TrajetCompose
+//
 {
+  #ifdef MAP
+      cout << "Appel a l'Afficheur() <TrajetCompose>" << endl;
+  #endif
+
   cout << "Trajet Composee de : " << endl;
-  listeTrajets->Afficher();
-}
+  listeTrajets->Afficher( 1 );
+  cout << endl;
+} //----- Fin de Afficher
+
+// Definition necessaire a cause de la méthode virtual pure de Trajet
+
+//----------------------------------------------------------------Getteur
+
+char * TrajetCompose::GetVilleDepart() const
+// Algorithme : Permet d'accéder a la ville de depart du trajet
+//
+{
+  #ifdef GETSET
+    cout << "Appel a GetVilleDepart de <TrajetCompose>" << endl;
+  #endif
+
+  return listeTrajets->GetDebut()->GetTrajet()->GetVilleDepart();
+} //----- Fin de GetVilleDepart
+
+char * TrajetCompose::GetVilleArrivee() const
+// Algorithme : Permet d'accéder a la ville d'arrive du trajet
+//
+{
+  #ifdef GETSET
+    cout << "Appel a GetVilleArrivee de <TrajetCompose>" << endl;
+  #endif
+
+  return listeTrajets->GetFin()->GetTrajet()->GetVilleArrivee();
+} //----- Fin de GetVilleArrive
 
 //-------------------------------------------- Constructeurs - destructeur
-TrajetCompose::TrajetCompose ( const char* depart, const char* arrivee, ListeChainee * trajets) : Trajet(depart , arrivee), listeTrajets(trajets)
+TrajetCompose::TrajetCompose (ListeChainee * trajets)
 // Algorithme : Initialise le TrajetCompose
 //
 {
-#ifdef MAP
-    cout << "Appel au constructeur de <TrajetCompose>" << endl;
-#endif
+  #ifdef MAP
+      cout << "Appel au constructeur de <TrajetCompose>" << endl;
+  #endif
+  listeTrajets = trajets;
 } //----- Fin de TrajetCompose
 
 
@@ -45,9 +79,11 @@ TrajetCompose::~TrajetCompose ( )
 // Algorithme : Détruit le TrajetCompose
 //
 {
-#ifdef MAP
-    cout << "Appel au destructeur de <TrajetCompose>" << endl;
-#endif
+  #ifdef MAP
+      cout << "Appel au destructeur de <TrajetCompose>" << endl;
+  #endif
+  
+  delete listeTrajets;
 } //----- Fin de ~TrajetCompose
 
 

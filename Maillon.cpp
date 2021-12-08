@@ -16,42 +16,49 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Maillon.h"
-#include "Trajet.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-Trajet * Maillon::GetDonnee() const
+const Trajet * Maillon::GetTrajet() const
+// Algorithme : Permet d'accéder au trajet contenu par le maillon
+//
 {
-  return donnee;
-}
+  return trajet;
+} //----- Fin de GetTrajet
 
 Maillon * Maillon::GetProchain() const
+// Algorithme : Permet d'accéder au prochain maillon de la chaine
+//
 {
   return prochain;
-}
+} //----- Fin de GetProchain
 
-void Maillon::SetDonnee( Trajet * uneDonnee )
+void Maillon::SetTrajet( Trajet * unTrajet )
+// Algorithme : Permet de modifier le trajet contenu par le maillon
+//
 {
-  donnee = uneDonnee;
-}
+  trajet = unTrajet;
+} //----- Fin de SetTrajet
 
-void Maillon::SetProchain(Maillon* unProchain )
+void Maillon::SetProchain( Maillon* unProchain )
+// Algorithme : Permet de modifier le prochain maillon de la chaine
+//
 {
   prochain = unProchain;
-}
+} //----- Fin de SetProchain
 
 //-------------------------------------------- Constructeurs - destructeur
-Maillon::Maillon ( Trajet * contenu) : donnee(contenu),prochain(nullptr)
+Maillon::Maillon ( Trajet * contenu) : trajet(contenu),prochain(nullptr)
 // Algorithme : Initialise le maillon avec la donnée et sans maillon suivant
 //
 {
   #ifdef MAP
       cout << "Appel au constructeur de <Maillon>" << endl;
   #endif
-} //----- Fin de maillon
+} //----- Fin de Maillon
 
 
 Maillon::~Maillon ( )
@@ -64,8 +71,11 @@ Maillon::~Maillon ( )
 
   if ( prochain != nullptr )
   {
-    delete ( prochain );
+    delete prochain;
   }
+  
+  delete trajet;
+  
 } //----- Fin de ~Maillon
 
 

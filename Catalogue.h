@@ -12,7 +12,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 
-#include "Trajet.h"
+#include "ListeChainee.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -31,17 +31,29 @@ class Catalogue
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void Inserer (Trajet ainserer);
+    void Inserer( Trajet * unTrajet);
     // Mode d'emploi :
     //
     // Contrat :
     // Permet d'inserer un trajet au catalogue
-    void Afficher ();
+    void Afficher () const ;
     // Mode d'emploi :
     //
     // Contrat :
     // Permet d'afficher le contenu du catalogue
-    Trajet* Rechercher (char * depart, char * arrivee , char *transport);
+    void Rechercher (const char * depart , const char * arrivee) const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    // Permet de chercher un trajet
+
+    void RechercherProfondeur(const char * depart, const char * arrivee) const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    // Permet de chercher un trajet
+
+    const ListeChainee * const GetListeParcours();
     // Mode d'emploi :
     //
     // Contrat :
@@ -51,13 +63,13 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    Catalogue (int* parcours);
+    Catalogue();
     // Mode d'emploi : Donne en paramètre le contenu du Catalogue 
     //
     // Contrat :
     // Créer le Catalogue
 
-    virtual ~Catalogue ( );
+    virtual ~Catalogue();
     // Mode d'emploi :
     //
     // Contrat :
@@ -69,7 +81,7 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-int * listeParcours;
+    ListeChainee * listeParcours;
 };
 
 #endif // CATALOGUE_H

@@ -12,7 +12,6 @@
 
 //--------------------------------------------------- Interfaces utilisées
 
-#include "Trajet.h"
 #include "ListeChainee.h"
 
 //------------------------------------------------------------- Constantes
@@ -22,7 +21,7 @@
 //------------------------------------------------------------------------
 // Rôle de la classe <TrajetCompose>
 //
-// TrajetCompose sert à implémenter un TrajetCompose
+// TrajetCompose sert à implementer un TrajetCompose
 //
 //------------------------------------------------------------------------
 
@@ -32,16 +31,29 @@ class TrajetCompose : public Trajet
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
+
+    void Afficher( int mode = 0 ) const;
     // Mode d'emploi :
     //
     // Contrat :
     //
-    void Afficher() const;
+
+//----------------------------------------------------------------Getteur
+
+    char * GetVilleDepart() const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+    char * GetVilleArrivee() const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    TrajetCompose ( const char* depart,  const char* arrivee, ListeChainee * trajets);
+    TrajetCompose (ListeChainee * trajets);
     // Mode d'emploi : Donne en paramètre le contenu du TrajetCompose 
     //
     // Contrat :
@@ -59,7 +71,7 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-ListeChainee * listeTrajets;
+    ListeChainee * listeTrajets;
 };
 
 #endif // TrajetCompose_H

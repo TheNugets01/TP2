@@ -1,5 +1,5 @@
 /*************************************************************************
-                           Catalogue  -  implémente un Catalogue
+                           Catalogue  -  implemente un Catalogue
                              -------------------
     début                : 19/11/2021
     copyright            : (C) 2021 par Hugo Blaess & Octave Duvivier
@@ -12,53 +12,275 @@
 
 //-------------------------------------------------------- Include système
 #include <iostream>
+#include <cstring>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
 
 #include "Catalogue.h"
-#include "Trajet.h"
 
 //------------------------------------------------------------- Constantes
 
+#define TAILLEBUFFER 100
+#define VIDEBUFFERCLAVIER() char ch; while( (ch = getchar() != '\n') && ch != EOF );
+
 //----------------------------------------------------------------- PUBLIC
+
+typedef struct
+{
+    char * Nom = nullptr;
+    char * Parent = nullptr;
+}DataVille;
 
 //----------------------------------------------------- Méthodes publiques
 
-void Catalogue::Inserer(Trajet ainserer)
+const ListeChainee * const Catalogue::GetListeParcours()
 {
-  
+    return listeParcours;
 }
 
-void Catalogue::Afficher ()
-{
-  
-}
+static bool explore( const char * , const char * , DataVille * , int , Maillon * );
+//Fonction d'exploration pour la recherche avancé
 
-Trajet* Catalogue::Rechercher (char * depart, char * arrivee , char * transport)
+void Catalogue::Inserer( Trajet * aInserer)
+// Algorithme : Permet d'inserer un trajet au catalogue !!(pour l'instant en fin)!!
+//
 {
-  
-}
+    listeParcours->AjouterTri(aInserer);
+} //----- Fin de Inserer
+
+void Catalogue::Afficher () const
+// Algorithme : Permet d'Afficher le contenu du Catalogue
+//
+{
+    cout << "Voici notre Catalogue de Trajets :" << endl;
+    listeParcours->Afficher();
+} //----- Fin de Afficher
+
+void Catalogue::Rechercher (const char * unDepart , const char * uneArrivee) const
+// Algorithme : Permet de rechercher un trajet dans le catalogue 
+//
+{
+    bool Find = false;
+    const Trajet * temp;
+    Maillon * courant = listeParcours->GetDebut();
+
+    while( courant != nullptr )
+    {
+        temp = courant -> GetTrajet();
+        if(strcmp(temp->GetVilleDepart() , unDepart) == 0 && strcmp( temp->GetVilleArrivee() , uneArrivee ) == 0 )
+        {
+            if(Find == false)
+            {
+                cout << "Vous voulez voyager entre " << unDepart << " et " << uneArrivee <<  ", Voila nos propositions :" << endl;
+                Find = true;
+            }
+
+            temp->Afficher();
+        }
+        courant = courant->GetProchain();
+    }
+
+    if( Find == false )
+    // Si on à pas trouver on tente une autre méthode de recherche
+    {
+        RechercherProfondeur( unDepart , uneArrivee );
+    }
+
+    delete[] unDepart;
+    delete[] uneArrivee;
+
+} //----- Fin de Rechercher
+
+void Catalogue::RechercherProfondeur(const char * unDepart , const char * uneArrivee ) const
+// Algorithme : Permet de rechercher un trajet ou une adition de trajet dans le catalogue 
+//
+{
+    #ifdef MAP
+        cout << "Appel a la méthode RechercherProfondeur de <Catalogue> pour " << unDepart << endl;
+    #endif
+
+    const int NbMaillon = listeParcours->GetNbMaillon();
+    DataVille * Ville = new DataVille[ NbMaillon * 2 ];
+    int VilleUnique = 0;
+    bool RedondanceVilleDep;
+    bool RedondanceVilleArr;
+    bool Find = false;
+
+    Maillon * debutListe = listeParcours->GetDebut();
+
+    Maillon * actuelle = debutListe;
+
+    while( actuelle != nullptr )
+    // Parcour du catalogue
+    {
+        RedondanceVilleDep = false;
+        RedondanceVilleArr = false;
+        for(int i = 0 ; i < VilleUnique ; ++i)
+        // Parcours des datas par ville
+        {
+            if( strcmp(actuelle->GetTrajet()->GetVilleDepart() , Ville[i].Nom) == 0 )
+            // On verifie que la ville n'existe pas déjà
+            {
+                RedondanceVilleDep = true;
+            }
+
+            if( strcmp(actuelle->GetTrajet()->GetVilleArrivee() , Ville[i].Nom) == 0 )
+            // On verifie que la ville n'existe pas déjà
+            {
+                RedondanceVilleArr = true;
+            }
+
+        }
+
+        if( !RedondanceVilleDep )
+        // Si la ville n'existe pas on l'ajoute
+        {   
+            Ville[ VilleUnique ].Nom = new char[ strlen( actuelle->GetTrajet()->GetVilleDepart() ) + 1];
+            strcpy( Ville[VilleUnique].Nom , actuelle->GetTrajet()->GetVilleDepart() );
+
+            if (strcmp( Ville[ VilleUnique ].Nom, unDepart) == 0 )
+            // Remplir la case Parent du départ pour prevenir le fait d'y passer deux fois
+            {
+                Ville[ VilleUnique ].Parent = new char[ strlen( "PointDeDepart" ) + 1 ];
+                strcpy( Ville[ VilleUnique ].Parent , "PointDeDepart");
+            }
+            
+            ++VilleUnique;
+        }
+
+        if( !RedondanceVilleArr && Ville[ VilleUnique ].Nom == nullptr )
+        // Si la ville n'existe pas on l'ajoute
+        {   
+            Ville[ VilleUnique ].Nom = new char[ strlen( actuelle->GetTrajet()->GetVilleArrivee() ) + 1 ];
+            strcpy( Ville[VilleUnique].Nom , actuelle->GetTrajet()->GetVilleArrivee() );
+            
+            ++VilleUnique;
+        }
+
+        actuelle = actuelle->GetProchain();
+    }
+
+    Find = explore( unDepart , uneArrivee , Ville , VilleUnique , debutListe );
+
+    //Afficher le Parcours
+    const char * BufferArrivee;
+    BufferArrivee = uneArrivee;
+
+    if( Find )
+    {
+        cout << "Vous pouvez voyager de" << endl ;
+        while( strcmp( BufferArrivee , unDepart ) != 0 )
+        {
+            for(int i = 0 ; i < VilleUnique ; ++i)
+            {
+                if( strcmp( BufferArrivee , Ville[i].Nom ) == 0)
+                {
+                    cout << "   - "<< Ville[i].Parent << " à " << Ville[i].Nom << endl;
+                    // Rechercher( Ville[i].Parent , Ville[i].Nom );
+                    BufferArrivee = Ville[i].Parent;
+                }
+            }
+        }
+    }
+    else
+    {
+        cout << " Nous n'avons pas trouvé de trajet ou combinaison de trajet corespondant " << endl;
+    }
+    //Detruire les char * dans Ville
+
+    for(int i = 0 ; i < VilleUnique ; ++i)
+    //Destroy
+    {
+        delete[] Ville[i].Nom;
+
+        if(Ville[i].Parent != nullptr )
+        {
+            delete[] Ville[i].Parent;
+        }
+
+    }
+
+    delete[] Ville;
+    
+}//----- Fin de RechercherProfondeur
+
+static bool explore( const char * unDepart, const char * uneArrivee , DataVille * Ville , int VilleUnique, Maillon * debutListe)
+{
+    #ifdef MAP
+        cout << "Appel a la fonction ordinaire explore de <Catalogue> pour " << unDepart << endl;
+    #endif
+
+    Maillon * actuelle = debutListe;
+    bool Find = false;
+
+    while( actuelle != nullptr )
+    // Parcours du Catalogue
+    {
+        if( strcmp( actuelle->GetTrajet()->GetVilleDepart() , unDepart ) == 0 )
+        // On trouve les Enfants du depart actuelle
+        {
+            for( int i = 0 ; i < VilleUnique ; ++i)
+            // Parcours les villes
+            {
+                if( strcmp( actuelle->GetTrajet()->GetVilleArrivee() , Ville[i].Nom ) == 0 && Ville[i].Parent == nullptr )
+                // Retrouve l'enfant dans ville
+                {
+                    if ( strcmp( uneArrivee , Ville[i].Nom) == 0)
+                    {
+                        Ville[i].Parent = new char[ strlen( unDepart ) + 1 ];
+                        strcpy(Ville[i].Parent , unDepart);
+                        // debuger : cout << "/ " << "OUI!" << " /" ;
+                        return Find = true;
+                    }
+                    else if( Ville[i].Parent == nullptr )
+                    {
+                        Ville[i].Parent = new char[ strlen( unDepart ) + 1 ];
+                        strcpy(Ville[i].Parent , unDepart);
+
+                        // Exploration recursive des enfants
+                        Find = explore( Ville[i].Nom , uneArrivee , Ville , VilleUnique , debutListe );
+
+                        if(Find)
+                        // On stop la recherche
+                        {
+                            return Find;
+                        }
+                    }
+                    
+                }
+            }
+        }
+
+        actuelle = actuelle->GetProchain();
+    }
+
+    return Find;
+}//----- Fin de explore
 
 //-------------------------------------------- Constructeurs - destructeur
-Catalogue::Catalogue (int* parcours) : listeParcours(parcours)
-// Algorithme : Initialise le Catalogue
+Catalogue::Catalogue()
+// Algorithme : Initialise le Catalogue en creeant la liste chainee
 //
 {
-#ifdef MAP
-    cout << "Appel au constructeur de <Catalogue>" << endl;
-#endif
-} //----- Fin de maillon
+    #ifdef MAP
+        cout << "Appel au constructeur de <Catalogue>" << endl;
+    #endif
 
+    listeParcours = new ListeChainee();
+} 
 
-Catalogue::~Catalogue ( )
-// Algorithme : Détruit le Catalogue
+Catalogue::~Catalogue()
+// Algorithme : Détruit le Catalogue 
 //
 {
-#ifdef MAP
-    cout << "Appel au destructeur de <Catalogue>" << endl;
-#endif
-} //----- Fin de ~Maillon
+    #ifdef MAP
+        cout << "Appel au destructeur de <Catalogue>" << endl;
+    #endif
+
+    delete listeParcours; // Son contenu est detruit en cascade par les autres destructeurs
+} //----- Fin de ~Catalogue
+//----- Fin de Catalogue
 
 
 //------------------------------------------------------------------ PRIVE
