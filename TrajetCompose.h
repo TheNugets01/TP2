@@ -21,7 +21,7 @@
 //------------------------------------------------------------------------
 // Rôle de la classe <TrajetCompose>
 //
-// TrajetCompose sert à implementer un TrajetCompose
+// TrajetCompose est une liste de trajet simple
 //
 //------------------------------------------------------------------------
 
@@ -34,36 +34,26 @@ public:
 
     void Afficher( int mode = 0 ) const;
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Affiche le contenu du trajetCompose
 
 //----------------------------------------------------------------Getteur
 
     char * GetVilleDepart() const;
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Renvoie la ville de depart du trajetcompose
     char * GetVilleArrivee() const;
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Renvoie la ville d'arrivee du trajetcompose
 
 //-------------------------------------------- Constructeurs - destructeur
 
     TrajetCompose (ListeChainee * trajets);
-    // Mode d'emploi : Donne en paramètre le contenu du TrajetCompose 
-    //
-    // Contrat :
-    // Créer le TrajetCompose
+    // Mode d'emploi :
+    // Construit le trajetcompose a partir de la liste de trajet en parametre
 
     virtual ~TrajetCompose ( );
     // Mode d'emploi :
-    //
-    // Contrat :
-    // Détruit le TrajetCompose
+    // Detruit le trajetcompose
 
 //------------------------------------------------------------------ PRIVE
 

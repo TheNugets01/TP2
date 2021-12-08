@@ -26,8 +26,6 @@ using namespace std;
 
 //-------------------------------------------- Constructeurs - destructeur
 Trajet::Trajet ()
-// Algorithme : Initialise le Trajet
-//
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Trajet>" << endl;
@@ -36,8 +34,6 @@ Trajet::Trajet ()
 
 
 Trajet::~Trajet ( )
-// Algorithme : Détruit le Trajet
-//
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Trajet>" << endl;

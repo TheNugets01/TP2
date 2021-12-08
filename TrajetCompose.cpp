@@ -25,8 +25,6 @@ using namespace std;
 //----------------------------------------------------- Méthodes publiques
 
 void TrajetCompose::Afficher( int mode ) const
-// Algorithme : Permet d'Afficher le TrajetCompose
-//
 {
   #ifdef MAP
       cout << "Appel a l'Afficheur() <TrajetCompose>" << endl;
@@ -37,13 +35,9 @@ void TrajetCompose::Afficher( int mode ) const
   cout << endl;
 } //----- Fin de Afficher
 
-// Definition necessaire a cause de la méthode virtual pure de Trajet
-
 //----------------------------------------------------------------Getteur
 
 char * TrajetCompose::GetVilleDepart() const
-// Algorithme : Permet d'accéder a la ville de depart du trajet
-//
 {
   #ifdef GETSET
     cout << "Appel a GetVilleDepart de <TrajetCompose>" << endl;
@@ -53,8 +47,6 @@ char * TrajetCompose::GetVilleDepart() const
 } //----- Fin de GetVilleDepart
 
 char * TrajetCompose::GetVilleArrivee() const
-// Algorithme : Permet d'accéder a la ville d'arrive du trajet
-//
 {
   #ifdef GETSET
     cout << "Appel a GetVilleArrivee de <TrajetCompose>" << endl;
@@ -65,8 +57,6 @@ char * TrajetCompose::GetVilleArrivee() const
 
 //-------------------------------------------- Constructeurs - destructeur
 TrajetCompose::TrajetCompose (ListeChainee * trajets)
-// Algorithme : Initialise le TrajetCompose
-//
 {
   #ifdef MAP
       cout << "Appel au constructeur de <TrajetCompose>" << endl;
@@ -76,8 +66,6 @@ TrajetCompose::TrajetCompose (ListeChainee * trajets)
 
 
 TrajetCompose::~TrajetCompose ( )
-// Algorithme : Détruit le TrajetCompose
-//
 {
   #ifdef MAP
       cout << "Appel au destructeur de <TrajetCompose>" << endl;

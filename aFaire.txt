@@ -1,10 +1,45 @@
 Liste de choses restantes à faire :
 
-- Vérifier la cohérance de nos classes et méthodes (chaque chose au bon endroit, pas de répétition, pas d'algo chelou bricolé)
+- Corriger la methode ajout tri + methode dans listechainne qui ne sont pas dans le .h et pas explique + g pas compris les commentaire de l'ajout trie
+// Si l'ajout se trie avant le debut ?? 
 - Vérifier les const et voir où on peut en ajouter
-- Mode Emploi des méthodes dans le point h (jsp quoi mettre) + Explications des classes et méthodes un peu bancale 
-- Commenter le code (ne pas abuser)
+- Corriger la recherche avancee
+
+- Faire le compte rendu (en ajoutant les classes dans les uml etc)
 
 
-- Faire le compte rendu
+Exemple de bug recherche avancee (on est dans une boucle infini a la fin impossible de sortir + les trajets proposee sont pas bon)
+
+Trajet Composee de : 
+ - AE à AR en B
+ - AR à AT en V
+
+Trajet Composee de : 
+ - AB à AC en M
+ - AC à TR en H
+
+Trajet Simple de : 
+ - AZ à AE en T
+
+
+Pour retourner au menu entrez un charactere
+>> 1
+
+Veuillez choisir une Action :
+- 1 : Ajouter un trajet au catalogue
+- 2 : Afficher le catalogue
+- 3 : Rechercher dans le cataloge 
+- q : Quitter
+>> 3
+D'ou voulez vous partir ?
+>> AZ
+Pour arriver ou ?
+>> AT
+Vous pouvez voyager de
+   - AE à AT
+   - AZ à AE
+   - PointDeDepart à AZ
+4
+6
+
 

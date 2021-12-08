@@ -43,25 +43,21 @@ static bool explore( const char * , const char * , DataVille * , int , Maillon *
 //Fonction d'exploration pour la recherche avancé
 
 void Catalogue::Inserer( Trajet * aInserer)
-// Algorithme : Permet d'inserer un trajet au catalogue !!(pour l'instant en fin)!!
-//
 {
     listeParcours->AjouterTri(aInserer);
 } //----- Fin de Inserer
 
 void Catalogue::Afficher () const
-// Algorithme : Permet d'Afficher le contenu du Catalogue
-//
 {
     cout << "Voici notre Catalogue de Trajets :" << endl;
     listeParcours->Afficher();
 } //----- Fin de Afficher
 
 void Catalogue::Rechercher (const char * unDepart , const char * uneArrivee) const
-// Algorithme : Permet de rechercher un trajet dans le catalogue 
-//
+    // Algorithme :
+    // On parcourt la liste de trajet et on verifie si le depart et l'arrivee correspondent a ceux passe en parametre
 {
-    bool Find = false;
+    bool Find = false; // permet d'afficher la bonne phrase d'intro et qu'une seule fois
     const Trajet * temp;
     Maillon * courant = listeParcours->GetDebut();
 
@@ -87,13 +83,13 @@ void Catalogue::Rechercher (const char * unDepart , const char * uneArrivee) con
         RechercherProfondeur( unDepart , uneArrivee );
     }
 
-    delete[] unDepart;
+    delete[] unDepart; // Il faut detruite les pointeurs que l'on a creer lors de la saisie
     delete[] uneArrivee;
 
 } //----- Fin de Rechercher
 
 void Catalogue::RechercherProfondeur(const char * unDepart , const char * uneArrivee ) const
-// Algorithme : Permet de rechercher un trajet ou une adition de trajet dans le catalogue 
+// Algorithme : Explique ton algo tatave
 //
 {
     #ifdef MAP
@@ -260,8 +256,6 @@ static bool explore( const char * unDepart, const char * uneArrivee , DataVille 
 
 //-------------------------------------------- Constructeurs - destructeur
 Catalogue::Catalogue()
-// Algorithme : Initialise le Catalogue en creeant la liste chainee
-//
 {
     #ifdef MAP
         cout << "Appel au constructeur de <Catalogue>" << endl;
@@ -271,8 +265,6 @@ Catalogue::Catalogue()
 } 
 
 Catalogue::~Catalogue()
-// Algorithme : Détruit le Catalogue 
-//
 {
     #ifdef MAP
         cout << "Appel au destructeur de <Catalogue>" << endl;

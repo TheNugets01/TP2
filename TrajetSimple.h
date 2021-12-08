@@ -26,35 +26,27 @@ public:
 
     void Afficher( int mode = 0) const;
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Affiche le contenu de la liste :
+    // Par défaut mode = 0 : On affiche les trajets de manière classique
+    // mode = 1 : On affiche les trajets simple au sein de trajets composees
 
 //----------------------------------------------------------------Getteur
 
     char * GetVilleDepart() const;
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Renvoie la ville de depart du trajetSimple
     char * GetVilleArrivee() const;
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Renvoie la ville d'arrivee du trajetCompose
 
 //-------------------------------------------- Constructeurs - destructeur
     
     TrajetSimple (char * unDepart, char * uneArrivee, char * unTransport);
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Construit le trajet simple a partir de sa ville de depart, d'arrivee et son moyen de transport
     virtual ~TrajetSimple ( );
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Detruit le trajet simple
 
 //------------------------------------------------------------------ PRIVE
 

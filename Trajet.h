@@ -19,7 +19,7 @@
 //------------------------------------------------------------------------
 // Rôle de la classe <Trajet>
 //
-// Trajet sert à implémenter un Trajet
+// La classe trajet permet de mettre des trajets simple et composee dans une meme collection
 //
 //------------------------------------------------------------------------
 
@@ -32,30 +32,28 @@ public:
 
     virtual void Afficher( int mode = 0 ) const = 0;
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Affiche le contenu de la liste :
+    // Par défaut mode = 0 : On affiche les trajets de manière classique
+    // mode = 1 : On affiche les trajets simple au sein de trajets composees
 
 //----------------------------------------------------------------Getteur
 
     virtual char * GetVilleDepart() const = 0;
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Renvoie la ville de depart d'un trajet
     virtual char * GetVilleArrivee() const = 0;
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Renvoie la ville de d'arrivee d'un trajet
 
 
 //-------------------------------------------- Constructeurs - destructeur
 
-  Trajet ();
-
-  virtual ~Trajet ( );
-
+    Trajet ();
+    // Mode d'emploi :
+    // Construit le trajet
+    virtual ~Trajet ( );
+    // Mode d'emploi :
+    // Detruit le trajet
 //------------------------------------------------------------------ PRIVE
 
 protected:

@@ -48,29 +48,21 @@ Maillon * NouveauEnDebut( Trajet * contenu , Maillon * actuelle ,  Maillon * deb
 }
 
 Maillon * ListeChainee::GetDebut() const
-// Algorithme : Permet d'accéder au premier maillon de la liste
-//
 {
   return debut;
 } //----- Fin de GetDebut
 
 Maillon * ListeChainee::GetFin() const
-// Algorithme : Permet d'accéder au dernier maillon de la liste
-//
 {
   return fin;
 } //----- Fin de GetFin
 
 int ListeChainee::GetNbMaillon() const
-// Algorithme : Permet de recupere le nb de Maillon de la liste
-//
 {
   return nbMaillon;
 }
 
 void ListeChainee::AjouterTri( Trajet * contenu)
-// Algorithme : Permet d'ajouter un trajet à la liste en triant d'abord par ordre alphabétique de la ville de depart puis d'arrivée
-//
 {
   #ifdef MAP
       cout << "Appel a la fonction AjouterTri de <ListeChainee>" << endl;
@@ -139,8 +131,6 @@ void ListeChainee::AjouterTri( Trajet * contenu)
 } //----- Fin de AjouterTri
 
 void ListeChainee::AjouterFin( Trajet * contenu)
-// Algorithme : Permet d'ajouter un trajet en fin de liste
-//
 {
   #ifdef MAP
       cout << "Appel a la fonction AjouterFin de <ListeChainee>" << endl;
@@ -148,12 +138,12 @@ void ListeChainee::AjouterFin( Trajet * contenu)
   
   ++nbMaillon;
 
-  if(debut == nullptr)
+  if(debut == nullptr) // Si liste vide on place le nouveau maillon en debut et fin
   {
     debut = new Maillon(contenu);
     fin = debut;
   }
-  else
+  else // Sinon on le place en fin de liste
   {
     Maillon * nouveau = new Maillon(contenu);
     fin -> SetProchain( nouveau );
@@ -162,8 +152,6 @@ void ListeChainee::AjouterFin( Trajet * contenu)
 } //----- Fin de AjouterFin
 
 void ListeChainee::Afficher ( int mode ) const
-// Algorithme : Permet d'afficher tous les trajets de la liste 
-//
 {
   #ifdef MAP
       cout << "Appel a la fonction Afficher() de <ListeChainee>" << endl;
@@ -191,8 +179,6 @@ void ListeChainee::Afficher ( int mode ) const
 
 //---------------------------- Constructeurs - destructeur
 ListeChainee::ListeChainee ( )
-// Algorithme : Initialise les pointeurs de debut et fin de liste
-//
 {
   #ifdef MAP
       cout << "Appel au constructeur de <ListeChainee>" << endl;
@@ -206,14 +192,12 @@ ListeChainee::ListeChainee ( )
 
 
 ListeChainee::~ListeChainee ( )
-// Algorithme : Detruit le premier maillon de la liste (les autres seront detruit en cascade par ~Maillon)
-//
 {
   #ifdef MAP
       cout << "Appel au destructeur de <ListeChainee>" << endl;
   #endif
 
-  delete debut; 
+  delete debut; // Detruit le premier maillon de la liste (les autres seront detruit en cascade par ~Maillon)
 } //----- Fin de ~ListeChainee
 
 

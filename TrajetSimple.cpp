@@ -26,8 +26,6 @@ using namespace std;
 //----------------------------------------------------- Méthodes publiques
 
 void TrajetSimple::Afficher( int mode ) const
-// Algorithme : Permet d'afficher le contenu du trajetsimple
-//
 {
   if( mode == 0 )
   {
@@ -42,8 +40,6 @@ void TrajetSimple::Afficher( int mode ) const
 //----------------------------------------------------------------Getteur
 
 char * TrajetSimple::GetVilleDepart() const
-// Algorithme : Permet d'accéder a la ville de depart du trajet
-//
 {
   return VilleDepart;
 } //----- Fin de GetVilleDepart
@@ -56,8 +52,6 @@ char * TrajetSimple::GetVilleArrivee() const
 
 //-------------------------------------------- Constructeurs - destructeur
 TrajetSimple::TrajetSimple (char * unDepart, char * uneArrivee, char * unTransport)
-// Algorithme : Initialise le TrajetSimple
-//
 {
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetSimple>" << endl;
@@ -69,8 +63,6 @@ TrajetSimple::TrajetSimple (char * unDepart, char * uneArrivee, char * unTranspo
 
 
 TrajetSimple::~TrajetSimple ( )
-// Algorithme : Détruit le TrajetSimple
-//
 {
 #ifdef MAP
     cout << "Appel au destructeur de <TrajetSimple>" << endl;
