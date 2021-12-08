@@ -12,6 +12,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 
+#include "Trajet.h"
 #include "ListeChainee.h"
 
 //------------------------------------------------------------- Constantes
@@ -21,7 +22,7 @@
 //------------------------------------------------------------------------
 // Rôle de la classe <TrajetCompose>
 //
-// Trajet compose est une liste de trajet simple
+// TrajetCompose sert à implémenter un TrajetCompose
 //
 //------------------------------------------------------------------------
 
@@ -31,39 +32,34 @@ class TrajetCompose : public Trajet
 
 public:
 //----------------------------------------------------- Méthodes publiques
-
+    // type Méthode ( liste des paramètres );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
     void Afficher() const;
-    // Mode d'emploi :
-    // Affiche le contenu du trajetCompose
-
-    void Afficher(int) const;
-    // Ne sera jamais utilisé mais nécessaire à cause du virtual sur Trajet
-
-//----------------------------------------------------------------Getteur
-
-    char * GetVilleDepart() const;
-    // Mode d'emploi :
-    // Renvoie la ville de depart du trajetcompose
-    char * GetVilleArrivee() const;
-    // Mode d'emploi :
-    // Renvoie la ville d'arrivee du trajetcompose
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    TrajetCompose (ListeChainee * trajets);
-    // Mode d'emploi :
-    // Construit le trajetcompose a partir de la liste de trajet en parametre
+    TrajetCompose ( const char* depart,  const char* arrivee, ListeChainee * trajets);
+    // Mode d'emploi : Donne en paramètre le contenu du TrajetCompose 
+    //
+    // Contrat :
+    // Créer le TrajetCompose
 
     virtual ~TrajetCompose ( );
     // Mode d'emploi :
-    // Detruit le trajetcompose
+    //
+    // Contrat :
+    // Détruit le TrajetCompose
+
 //------------------------------------------------------------------ PRIVE
 
 protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-    ListeChainee * listeTrajets;
+ListeChainee * listeTrajets;
 };
 
 #endif // TrajetCompose_H

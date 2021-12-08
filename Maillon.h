@@ -1,5 +1,5 @@
 /*************************************************************************
-                           Maillon  -  Interface de la classe Maillon
+                           Maillon  -  interface de la classe Maillon
                              -------------------
     début                : 19/11/2021
     copyright            : (C) 2021 par Hugo Blaess & Octave Duvivier
@@ -7,8 +7,8 @@
 *************************************************************************/
 
 //---------- Interface de la classe <Maillon> (fichier Maillon.h) ----------------
-#if ! defined ( MAILLON_H )
-#define MAILLON_H
+#if ! defined ( XXX_H )
+#define XXX_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -18,7 +18,8 @@
 
 //------------------------------------------------------------------ Types
 // Rôle de la classe <Maillon>
-// Maillon est un element de la liste chainee
+//
+// Maillon sert à implémenter la liste chainee
 
 class Maillon
 {
@@ -27,34 +28,22 @@ class Maillon
 public:
 //----------------------------------------------------- Méthodes publiques
 //-------------------------------------------- Constructeurs - destructeur
-    Maillon ( Trajet * contenu);
-    // Mode d'emploi :
-    // Construit un maillon à partir du trajet qu'il doit contenir
+    Maillon (Trajet * contenu);
     virtual ~Maillon ( );
-    // Mode d'emploi :
-    // Détruit le maillon
 //----------------------------------------------------------------Getteur
-    const Trajet * GetTrajet() const;
-    // Mode d'emploi :
-    // Renvoie le trajet contenu par le maillon
-    Maillon * GetProchain() const;
-    // Mode d'emploi :
-    // Renvoie le maillon suivant
+Trajet * GetDonnee() const;
+Maillon * GetProchain() const;
 //----------------------------------------------------------------Setteur
-    void SetTrajet( Trajet * unTrajet );
-    // Mode d'emploi :
-    // Modifie le trajet contenu par le maillon
-    void SetProchain( Maillon * unProchain);
-    // Mode d'emploi :
-    // Modifie le pointeur vers le maillon suivant
+void SetDonnee( Trajet * uneDonnee );
+void SetProchain( Maillon * unProchain);
 
 protected:
 //----------------------------------------------------- Méthodes protégées
 //----------------------------------------------------- Attributs protégés
-    const Trajet * trajet;
-    Maillon * prochain;
+Trajet * donnee;
+Maillon * prochain;
 
 };
 
-#endif // MAILLON_H
+#endif // XXX_H
 

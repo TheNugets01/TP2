@@ -1,33 +1,23 @@
-EXTFLAGS = -ansi -pedantic -Wall -std=c++11
-
-all: sejours
-
-MAP: EXTFLAGS += -DMAP
-MAP: sejours
-
-GETSET: EXTFLAGS += -DGETSET
-GETSET: sejours
-
-sejours : Catalogue.o ListeChainee.o Maillon.o Trajet.o  TrajetSimple.o TrajetCompose.o main.o 
-		g++ -o sejours Catalogue.o ListeChainee.o Maillon.o Trajet.o TrajetSimple.o TrajetCompose.o main.o $(EXTFLAGS)
+main : Catalogue.o ListeChainee.o Maillon.o Trajet.o TrajetCompose.o TrajetSimple.o main.o 
+		g++ -o main Catalogue.o ListeChainee.o Maillon.o Trajet.o TrajetCompose.o TrajetSimple.o main.o  -ansi -pedantic -Wall -std = c++11
 
 Catalogue.o : Catalogue.cpp
-		g++ -c -g $(EXTFLAGS) Catalogue.cpp
+		g++ -c Catalogue.cpp -ansi -pedantic -Wall -std = c++11
 
 ListeChainee.o : ListeChainee.cpp
-		g++ -c -g $(EXTFLAGS) ListeChainee.cpp
+		g++ -c ListeChainee.cpp -ansi -pedantic -Wall -std = c++11
 
 Maillon.o : Maillon.cpp
-		g++ -c -g $(EXTFLAGS) Maillon.cpp
+		g++ -c Maillon.cpp -ansi -pedantic -Wall -std = c++11
 
 Trajet.o : Trajet.cpp
-		g++ -c -g $(EXTFLAGS) Trajet.cpp
+		g++ -c Trajet.cpp -ansi -pedantic -Wall -std = c++11
 
-TrajetSimple.o : TrajetSimple.cpp
-		g++ -c -g $(EXTFLAGS) TrajetSimple.cpp
+TrajetCompose.o : TrajetCompose.cpp -ansi -pedantic -Wall -std = c++11
+		g++ -c TrajetCompose.cpp -ansi -pedantic -Wall -std = c++11
 
-TrajetCompose.o : TrajetCompose.cpp
-		g++ -c -g $(EXTFLAGS) TrajetCompose.cpp
+TrajetSimple.o : TrajetSimple.cpp -ansi -pedantic -Wall -std = c++11
+		g++ -c TrajetSimple.cpp
 
 main.o : main.cpp
-		g++ -c -g $(EXTFLAGS) main.cpp
+		g++ -c main.cpp -ansi -pedantic -Wall -std = c++11

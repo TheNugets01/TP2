@@ -24,30 +24,12 @@ class TrajetSimple : public Trajet
 public:
 //----------------------------------------------------- Méthodes publiques
 
-    void Afficher() const;
-    // Mode d'emploi :
-    // Permet d'afficher le trajet simple de maniere classique
-    void Afficher(int mode) const;
-    // Mode d'emploi :
-    // Permet d'afficher le trajet simple au sein d'un trajet compose
-
-//----------------------------------------------------------------Getteur
-
-    char * GetVilleDepart() const;
-    // Mode d'emploi :
-    // Renvoie la ville de depart du trajetSimple
-    char * GetVilleArrivee() const;
-    // Mode d'emploi :
-    // Renvoie la ville d'arrivee du trajetCompose
-
 //-------------------------------------------- Constructeurs - destructeur
-    
-    TrajetSimple (char * unDepart, char * uneArrivee, char * unTransport);
-    // Mode d'emploi :
-    // Construit le trajet simple a partir de sa ville de depart, d'arrivee et son moyen de transport
+
+    TrajetSimple (const char* depart, const char* arrivee, const char* transport);
+    void Afficher() const;
+
     virtual ~TrajetSimple ( );
-    // Mode d'emploi :
-    // Detruit le trajet simple
 
 //------------------------------------------------------------------ PRIVE
 
@@ -55,9 +37,7 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-char * VilleArrivee;
-char * VilleDepart;
-char * MoyenTransport;
+char * moyenTransport;
 };
 
 #endif // TRAJETSIMPLE_H

@@ -23,22 +23,47 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
+char * Trajet::GetVilleDepart() const
+{
+  return villeDepart;
+}
+char * Trajet::GetVilleArrivee() const
+{
+  return villeArrivee;
+}
 
 //-------------------------------------------- Constructeurs - destructeur
-Trajet::Trajet ()
+Trajet::Trajet ( const char* depart, const char* arrivee)
+// Algorithme : Initialise le Trajet
+//
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Trajet>" << endl;
 #endif
-} //----- Fin de Trajet
+
+  //Evite le Segmentation Fault car villeDepart et villeArrivee initialement aléatoire
+  char Depart[sizeof(depart)];
+  char Arrivee[sizeof(arrivee)];
+  villeDepart = Depart;
+  villeArrivee = Arrivee;
+
+  
+  for (int i; i < sizeof(depart) ;++i)
+    villeDepart[i]=depart[i];
+
+  for (int i; i< sizeof(arrivee) ;++i)
+    villeArrivee[i]=arrivee[i];
+} //----- Fin de maillon
 
 
 Trajet::~Trajet ( )
+// Algorithme : Détruit le Trajet
+//
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Trajet>" << endl;
 #endif
-} //----- Fin de ~Trajet
+} //----- Fin de ~Maillon
 
 
 //------------------------------------------------------------------ PRIVE
