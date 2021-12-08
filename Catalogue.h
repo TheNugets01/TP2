@@ -1,5 +1,5 @@
 /*************************************************************************
-                           Catalogue  -  Interface de la classe Catalogue
+                           Catalogue  -  interface de la classe Catalogue
                              -------------------
     début                : 19/11/2021
     copyright            : (C) 2021 par Hugo Blaess & Octave Duvivier
@@ -12,7 +12,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 
-#include "ListeChainee.h"
+#include "Trajet.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -21,7 +21,7 @@
 //------------------------------------------------------------------------
 // Rôle de la classe <Catalogue>
 //
-// Catalogue sert à lister tous les trajets existant puis à les manipuler via les méthodes d'insertion, d'affichage ou de recherche
+// Catalogue sert à implémenter un Catalogue
 //
 //------------------------------------------------------------------------
 
@@ -31,25 +31,37 @@ class Catalogue
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void Inserer( Trajet * unTrajet);
+    void Inserer (Trajet ainserer);
     // Mode d'emploi :
-    // Permet d'insérer un Trajet au catalogue en le triant par ordre alphabétique
-    void Afficher () const ;
+    //
+    // Contrat :
+    // Permet d'inserer un trajet au catalogue
+    void Afficher ();
     // Mode d'emploi :
-    // Affiche le contenu courant du catalogue
-    void Rechercher (const char * depart, const char * arrivee);
+    //
+    // Contrat :
+    // Permet d'afficher le contenu du catalogue
+    Trajet* Rechercher (char * depart, char * arrivee , char *transport);
     // Mode d'emploi :
-    // Permet de rechercher un trajet par ville de départ et d'arriver
+    //
+    // Contrat :
+    // Permet de chercher un trajet
+
+
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    Catalogue ();
-    // Mode d'emploi :
-    // Construit le catalogue
+    Catalogue (int* parcours);
+    // Mode d'emploi : Donne en paramètre le contenu du Catalogue 
+    //
+    // Contrat :
+    // Créer le Catalogue
 
     virtual ~Catalogue ( );
     // Mode d'emploi :
-    // Détruit le catalogue
+    //
+    // Contrat :
+    // Détruit le Catalogue
 
 //------------------------------------------------------------------ PRIVE
 
@@ -57,7 +69,7 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-    ListeChainee * listeParcours;
+int * listeParcours;
 };
 
 #endif // CATALOGUE_H

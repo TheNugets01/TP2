@@ -1,17 +1,10 @@
-#include <iostream>
-#include <cstring>
+#include <stdio.h>
 using namespace std;
-
-#define carl "yo"
-
+#include <iostream>
 
 int main()
 {
+    cout<<"bonjour"<<endl;
     
-    if( strcmp("A","Bonjour") < 0 )
-    {  
-        cout << carl << endl;
-    }
-
     return 0;
 }

@@ -1,5 +1,5 @@
 /*************************************************************************
-                           ListeChainee  -  Interface de la classe ListeChainee
+                           ListeChainee  -  interface de la classe maillon
                              -------------------
     début                : 19/11/2021
     copyright            : (C) $YEAR$ par $AUTHOR$
@@ -12,59 +12,41 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "Maillon.h"
+#include "Trajet.h"
+#include "TrajetSimple.h"
 
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <ListeChainee>
-//  Implemente la liste chainee avec pointeur de debut et de fin
-//  Utile pour creer des trajets compose et le catalogue
+// Rôle de la classe <Xxx>
+//
+//
 //------------------------------------------------------------------------
 
 class ListeChainee
 {
 public:
 //--------------------------- Méthodes publiques
-    void AjouterTri( Trajet * contenu);
-    // Mode d'emploi :
-    // Ajout d'un trajet dans la liste par ordre alphabétique de la ville de départ
-    void AjouterFin( Trajet * contenu);
-    // Mode d'emploi :
-    // Ajout d'un Trajet en fin de liste
-    void Afficher () const;
-    // Mode d'emploi :
-    // Affiche le contenu de la liste
-    void Afficher (int mode) const;
-    // Mode d'emploi :
-    // Surcharge permettant d'adapter l'affichage des trajets simple au sein d'un trajet compose
-//----------------------------------------------------------------Getteur
-    Maillon * GetDebut() const;
-    // Mode d'emploi :
-    // Renvoie le premier maillon de la liste
-    Maillon * GetFin() const;
-    // Mode d'emploi :
-    // Renvoie le dernier maillon de la liste
+void Ajouter( Trajet * contenu) ;
+void Afficher ();
 
 //---- Constructeurs - destructeur
-    ListeChainee ( );
-    // Mode d'emploi :
-    // Construit la liste chainee
-    virtual ~ListeChainee ( );
-    // Mode d'emploi :
-    // Detruit la liste chainee
-
+ListeChainee ( );
+virtual ~ListeChainee ( );
+    
 protected:
 //------------ Méthodes protégées
 
 //--- Attributs protégés
-  Maillon * debut;
-  Maillon * fin;
+Maillon * debut;
+//Maillon * fin;
+int nbMaillons;
 
 };
 
 //------------------------ Autres définitions dépendantes de <ListeChainee>
 
-#endif // LISTECHAINEE_H
+#endif // XXX_H
 

@@ -1,5 +1,5 @@
 /*************************************************************************
-                           TrajetCompose  -  implemente un TrajetCompose
+                           TrajetCompose  -  implémente un TrajetCompose
                              -------------------
     début                : 19/11/2021
     copyright            : (C) 2021 par Hugo Blaess & Octave Duvivier
@@ -26,55 +26,28 @@ using namespace std;
 
 void TrajetCompose::Afficher() const
 {
-  #ifdef MAP
-      cout << "Appel a l'Afficheur() <TrajetCompose>" << endl;
-  #endif
-
   cout << "Trajet Composee de : " << endl;
-  listeTrajets->Afficher(1);
-  cout << endl;
-} //----- Fin de Afficher
-
-void TrajetCompose::Afficher(int mode) const {}
-// Definition necessaire a cause de la méthode virtual pure de Trajet
-
-//----------------------------------------------------------------Getteur
-
-char * TrajetCompose::GetVilleDepart() const
-{
-  #ifdef GETSET
-    cout << "Appel a GetVilleDepart de <TrajetCompose>" << endl;
-  #endif
-
-  return listeTrajets->GetDebut()->GetTrajet()->GetVilleDepart();
-} //----- Fin de GetVilleDepart
-
-char * TrajetCompose::GetVilleArrivee() const
-{
-  #ifdef GETSET
-    cout << "Appel a GetVilleArrivee de <TrajetCompose>" << endl;
-  #endif
-
-  return listeTrajets->GetFin()->GetTrajet()->GetVilleArrivee();
-} //----- Fin de GetVilleArrive
+  listeTrajets->Afficher();
+}
 
 //-------------------------------------------- Constructeurs - destructeur
-TrajetCompose::TrajetCompose (ListeChainee * trajets)
+TrajetCompose::TrajetCompose ( const char* depart, const char* arrivee, ListeChainee * trajets) : Trajet(depart , arrivee), listeTrajets(trajets)
+// Algorithme : Initialise le TrajetCompose
+//
 {
-  #ifdef MAP
-      cout << "Appel au constructeur de <TrajetCompose>" << endl;
-  #endif
-  listeTrajets = trajets;
+#ifdef MAP
+    cout << "Appel au constructeur de <TrajetCompose>" << endl;
+#endif
 } //----- Fin de TrajetCompose
 
 
 TrajetCompose::~TrajetCompose ( )
+// Algorithme : Détruit le TrajetCompose
+//
 {
-  #ifdef MAP
-      cout << "Appel au destructeur de <TrajetCompose>" << endl;
-  #endif
-  
-  delete listeTrajets;
+#ifdef MAP
+    cout << "Appel au destructeur de <TrajetCompose>" << endl;
+#endif
 } //----- Fin de ~TrajetCompose
 
 
