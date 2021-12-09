@@ -37,13 +37,13 @@ void Maillon::SetTrajet( Trajet * unTrajet )
   trajet = unTrajet;
 } //----- Fin de SetTrajet
 
-void Maillon::SetProchain( Maillon* unProchain )
+void Maillon::SetProchain( Maillon * unProchain )
 {
   prochain = unProchain;
 } //----- Fin de SetProchain
 
 //-------------------------------------------- Constructeurs - destructeur
-Maillon::Maillon ( Trajet * contenu) : trajet(contenu),prochain(nullptr)
+Maillon::Maillon ( Trajet * contenu ) : trajet(contenu) , prochain(nullptr)
 {
   #ifdef MAP
       cout << "Appel au constructeur de <Maillon>" << endl;

@@ -54,9 +54,9 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-char * VilleArrivee;
-char * VilleDepart;
-char * MoyenTransport;
+char * villeArrivee;
+char * villeDepart;
+char * moyenTransport;
 };
 
 #endif // TRAJETSIMPLE_H

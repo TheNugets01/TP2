@@ -37,7 +37,7 @@ public:
     void Afficher () const ;
     // Mode d'emploi :
     // Affiche le contenu courant du catalogue
-    void Rechercher (const char * depart , const char * arrivee) const;
+    void Rechercher (const char * depart , const char * arrivee , int mode = 0 ) const;
     // Mode d'emploi :
     // Permet de rechercher un trajet par ville de départ et d'arrivee
 

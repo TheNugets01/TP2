@@ -31,6 +31,10 @@ public:
     // Mode d'emploi :
     // Ajout d'un trajet dans la liste par ordre alphabétique de la ville de départ
 
+    void AjouterDeb( Trajet * contenu);
+    // Mode d'emploi :
+    // Ajout d'un Trajet en debut de liste
+
     void AjouterFin( Trajet * contenu);
     // Mode d'emploi :
     // Ajout d'un Trajet en fin de liste

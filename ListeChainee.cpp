@@ -22,29 +22,14 @@ using namespace std;
 //------------------------------------------------------------------PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void NouveauEnSuite(  Trajet * contenu , Maillon * actuelle , Maillon * fin)
+void NouveauEnSuite(  Trajet * contenu , Maillon * actuelle)
 {
   Maillon * nouveau = new Maillon(contenu);
-  nouveau -> SetTrajet(contenu);
   
   Maillon * MemSuivant = actuelle->GetProchain();
 
-  if ( MemSuivant == nullptr )
-  // Si on insere en fin de chaine
-  {
-    fin = nouveau;
-  }
-
   nouveau -> SetProchain( MemSuivant );
   actuelle -> SetProchain( nouveau );
-}
-
-Maillon * NouveauEnDebut( Trajet * contenu , Maillon * actuelle ,  Maillon * debut )
-{
-  Maillon * nouveau = new Maillon(contenu);
-  nouveau -> SetTrajet(contenu);
-  nouveau -> SetProchain(actuelle);
-  return debut = nouveau;
 }
 
 Maillon * ListeChainee::GetDebut() const
@@ -62,75 +47,98 @@ int ListeChainee::GetNbMaillon() const
   return nbMaillon;
 }
 
-void ListeChainee::AjouterTri( Trajet * contenu)
+void ListeChainee::AjouterTri( Trajet * contenu )
 {
   #ifdef MAP
       cout << "Appel a la fonction AjouterTri de <ListeChainee>" << endl;
   #endif
 
-  ++nbMaillon;
-
   if ( debut == nullptr )
   //Si la chaine est vide
   {
     debut = new Maillon(contenu);
-  }
-  else if( debut->GetProchain() == nullptr )
-  //Si il n'y a qu'un seul Maillon
-  {
-    Maillon * actuelle = debut;
-
-    if( strcmp( actuelle->GetTrajet()->GetVilleDepart() ,  contenu->GetVilleDepart()) > 0 )
-    //Si l'ajout se trie avant le debut par rapport a la ville de depart
-    {
-      debut = NouveauEnDebut(contenu , actuelle , debut );
-    }
-    else if( strcmp(actuelle->GetTrajet()->GetVilleDepart(), contenu->GetVilleDepart()) == 0 && strcmp(actuelle->GetTrajet()->GetVilleArrivee() , contenu->GetVilleArrivee()) > 0)
-    //Si l'ajout se trie avant le debut par rapport a la ville d'arrivée
-    {
-      debut = NouveauEnDebut(contenu , actuelle , debut );
-    }
-    else
-    {
-      NouveauEnSuite( contenu , actuelle , fin);
-    }
-
-    fin = debut->GetProchain();
+    fin = debut;
   }
   else
-  //Si il y a plus d'un maillon
   {
     Maillon * actuelle = debut;
-    while ( actuelle -> GetProchain() != nullptr && ( strcmp( actuelle->GetProchain()->GetTrajet()->GetVilleDepart() , contenu->GetVilleDepart()) < 0 ) )
-    //Positionnement par rapport a la ville de depart
-    { 
-      actuelle = actuelle -> GetProchain();
-    }
 
-    if( actuelle -> GetProchain() != nullptr && strcmp( actuelle->GetTrajet()->GetVilleDepart() , contenu->GetVilleDepart()) == 0 )
-    //Si depart identique
+    if( actuelle == debut && strcmp( contenu->GetVilleDepart() , actuelle->GetTrajet()->GetVilleDepart() ) <= 0 )
+    //Si on est debut il y a potentiellement un ajout en debut
     {
-      while( actuelle -> GetProchain() != nullptr && ( strcmp(actuelle->GetProchain()->GetTrajet()->GetVilleArrivee() , contenu->GetVilleArrivee()) < 0 ) 
-             && strcmp( actuelle->GetProchain()->GetTrajet()->GetVilleDepart() , contenu->GetVilleDepart()) == 0)
-      //Positionnement par rapport a la ville d'arrivée si depart identique
-      { 
-        actuelle = actuelle -> GetProchain();
+      if( strcmp( contenu->GetVilleDepart() , actuelle->GetTrajet()->GetVilleDepart() ) == 0 
+          && strcmp( contenu->GetVilleArrivee() , actuelle->GetTrajet()->GetVilleArrivee()  ) > 0 )
+      // Cas ou l'ajout ne se fait pas avant
+      {
+        if(actuelle->GetProchain() != nullptr )
+        {
+          NouveauEnSuite( contenu , actuelle );
+          ++nbMaillon;
+        }
+        else
+        {
+          AjouterFin( contenu );
+        }
       }
-    }
-
-    if( debut == actuelle && strcmp(actuelle->GetTrajet()->GetVilleArrivee() , contenu->GetVilleArrivee()) > 0)
-    //Si l'ajout se trie avant le debut
-    {
-      debut = NouveauEnDebut( contenu , actuelle , debut );
+      else
+      {
+        AjouterDeb(contenu);
+      }
     }
     else
     {
-      NouveauEnSuite( contenu , actuelle , fin);
+      bool ajout = false;
+
+      while(!ajout)
+      {
+        if( actuelle->GetProchain() != nullptr )
+        {
+          if( strcmp ( contenu->GetVilleDepart() , actuelle->GetProchain()->GetTrajet()->GetVilleDepart() ) < 0 
+              //Si on est avant dans le tri alphabetique par rapport au départ ^^^^^^^
+              || ( strcmp( contenu->GetVilleDepart() , actuelle->GetProchain()->GetTrajet()->GetVilleDepart() ) == 0 
+              && strcmp( contenu->GetVilleArrivee() , actuelle->GetProchain()->GetTrajet()->GetVilleArrivee() ) < 0 ) )
+              //Si on a les mêms départ et qu'on est avant dans le tri alphabetique par rapport a l'arrivée ^^^^^^^
+          {
+            NouveauEnSuite( contenu , actuelle );
+            ajout = true;
+            ++nbMaillon;
+          }
+          else
+          {
+            actuelle = actuelle->GetProchain();
+          }
+        }
+        else
+        {
+          AjouterFin( contenu );
+          ajout = true;
+        }
+      }
     }
   }
-} //----- Fin de AjouterTri
+}//---- Fin de Ajouter Tri
 
-void ListeChainee::AjouterFin( Trajet * contenu)
+void ListeChainee::AjouterDeb( Trajet * contenu )
+{
+  #ifdef MAP
+      cout << "Appel a la fonction AjouterDeb de <ListeChainee>" << endl;
+  #endif
+
+  if(debut == nullptr) // Si liste vide on place le nouveau maillon en debut et fin
+  {
+    debut = new Maillon(contenu);
+    fin = debut;
+  }
+  else // Sinon on le place en debut de liste
+  {
+    Maillon * nouveau = new Maillon(contenu);
+    nouveau -> SetProchain( debut );
+    debut = nouveau;
+  }
+} //----- Fin de AjouterDeb
+
+
+void ListeChainee::AjouterFin( Trajet * contenu )
 {
   #ifdef MAP
       cout << "Appel a la fonction AjouterFin de <ListeChainee>" << endl;
@@ -146,7 +154,7 @@ void ListeChainee::AjouterFin( Trajet * contenu)
   else // Sinon on le place en fin de liste
   {
     Maillon * nouveau = new Maillon(contenu);
-    fin -> SetProchain( nouveau );
+    fin->SetProchain(nouveau);
     fin = nouveau;
   }
 } //----- Fin de AjouterFin

@@ -44,7 +44,7 @@ static bool explore( const char * , const char * , DataVille * , int , Maillon *
 
 void Catalogue::Inserer( Trajet * aInserer)
 {
-    listeParcours->AjouterTri(aInserer);
+    listeParcours->AjouterTri( aInserer );
 } //----- Fin de Inserer
 
 void Catalogue::Afficher () const
@@ -53,7 +53,7 @@ void Catalogue::Afficher () const
     listeParcours->Afficher();
 } //----- Fin de Afficher
 
-void Catalogue::Rechercher (const char * unDepart , const char * uneArrivee) const
+void Catalogue::Rechercher (const char * unDepart , const char * uneArrivee , int mode ) const
     // Algorithme :
     // On parcourt la liste de trajet et on verifie si le depart et l'arrivee correspondent a ceux passe en parametre
 {
@@ -64,9 +64,9 @@ void Catalogue::Rechercher (const char * unDepart , const char * uneArrivee) con
     while( courant != nullptr )
     {
         temp = courant -> GetTrajet();
-        if(strcmp(temp->GetVilleDepart() , unDepart) == 0 && strcmp( temp->GetVilleArrivee() , uneArrivee ) == 0 )
+        if(strcmp(temp->GetVilleDepart() , unDepart ) == 0 && strcmp( temp->GetVilleArrivee() , uneArrivee ) == 0 )
         {
-            if(Find == false)
+            if(Find == false && mode == 0)
             {
                 cout << "Vous voulez voyager entre " << unDepart << " et " << uneArrivee <<  ", Voila nos propositions :" << endl;
                 Find = true;
@@ -77,19 +77,24 @@ void Catalogue::Rechercher (const char * unDepart , const char * uneArrivee) con
         courant = courant->GetProchain();
     }
 
-    if( Find == false )
+    if( Find == false && mode == 0)
     // Si on à pas trouver on tente une autre méthode de recherche
     {
         RechercherProfondeur( unDepart , uneArrivee );
     }
 
-    delete[] unDepart; // Il faut detruite les pointeurs que l'on a creer lors de la saisie
-    delete[] uneArrivee;
+    if(mode == 0)
+    {
+        delete[] unDepart; // Il faut detruite les pointeurs que l'on a creer lors de la saisie
+        delete[] uneArrivee;
+    }
 
 } //----- Fin de Rechercher
 
 void Catalogue::RechercherProfondeur(const char * unDepart , const char * uneArrivee ) const
-// Algorithme : Explique ton algo tatave
+// Algorithme : 1. On part de la ville de depart on la marque commde déjà visité
+//              2. On recupere les destinations que l'ont peut atteindre
+//              3. On rehitere l'operation sur toutes les villes atteignable non visité jusque trouvé l'arrivé
 //
 {
     #ifdef MAP
@@ -165,15 +170,14 @@ void Catalogue::RechercherProfondeur(const char * unDepart , const char * uneArr
 
     if( Find )
     {
-        cout << "Vous pouvez voyager de" << endl ;
+        cout << "Vous pouvez voyager de " << unDepart << " à " << uneArrivee << " en faisant :"<< endl ;
         while( strcmp( BufferArrivee , unDepart ) != 0 )
         {
             for(int i = 0 ; i < VilleUnique ; ++i)
             {
                 if( strcmp( BufferArrivee , Ville[i].Nom ) == 0)
                 {
-                    cout << "   - "<< Ville[i].Parent << " à " << Ville[i].Nom << endl;
-                    // Rechercher( Ville[i].Parent , Ville[i].Nom );
+                    Rechercher( Ville[i].Parent , Ville[i].Nom , 1);
                     BufferArrivee = Ville[i].Parent;
                 }
             }
@@ -181,9 +185,10 @@ void Catalogue::RechercherProfondeur(const char * unDepart , const char * uneArr
     }
     else
     {
-        cout << " Nous n'avons pas trouvé de trajet ou combinaison de trajet corespondant " << endl;
+        cout << " Nous n'avons pas trouvé de trajet ou combinaison de trajets corespondant a votre recherche" << endl;
     }
-    //Detruire les char * dans Ville
+    
+    //Detruit les char * dans Ville
 
     for(int i = 0 ; i < VilleUnique ; ++i)
     //Destroy
@@ -225,7 +230,7 @@ static bool explore( const char * unDepart, const char * uneArrivee , DataVille 
                     if ( strcmp( uneArrivee , Ville[i].Nom) == 0)
                     {
                         Ville[i].Parent = new char[ strlen( unDepart ) + 1 ];
-                        strcpy(Ville[i].Parent , unDepart);
+                        strcpy( Ville[i].Parent , unDepart );
                         // debuger : cout << "/ " << "OUI!" << " /" ;
                         return Find = true;
                     }

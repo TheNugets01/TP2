@@ -29,11 +29,11 @@ void TrajetSimple::Afficher( int mode ) const
 {
   if( mode == 0 )
   {
-    cout << "Trajet Simple de : " << endl << " - " << VilleDepart << " à " << VilleArrivee << " en " << MoyenTransport << endl << endl;
+    cout << "Trajet Simple de : " << endl << " - " << villeDepart << " à " << villeArrivee << " en " << moyenTransport << endl << endl;
   }
   else if ( mode == 1 )
   {
-    cout << " - " << VilleDepart << " à " << VilleArrivee << " en " << MoyenTransport << endl;
+    cout << " - " << villeDepart << " à " << villeArrivee << " en " << moyenTransport << endl;
   }
 } //----- Fin de Afficher
 
@@ -41,13 +41,13 @@ void TrajetSimple::Afficher( int mode ) const
 
 char * TrajetSimple::GetVilleDepart() const
 {
-  return VilleDepart;
+  return villeDepart;
 } //----- Fin de GetVilleDepart
 char * TrajetSimple::GetVilleArrivee() const
 // Algorithme : Permet d'accéder a la ville d'arrive du trajet
 //
 {
-  return VilleArrivee;
+  return villeArrivee;
 } //----- Fin de GetVilleArrivee
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -56,9 +56,9 @@ TrajetSimple::TrajetSimple (char * unDepart, char * uneArrivee, char * unTranspo
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetSimple>" << endl;
 #endif
-  VilleDepart = unDepart;
-  VilleArrivee = uneArrivee;
-  MoyenTransport = unTransport;
+  villeDepart = unDepart;
+  villeArrivee = uneArrivee;
+  moyenTransport = unTransport;
 } //----- Fin de TrajetSimple
 
 
@@ -67,9 +67,9 @@ TrajetSimple::~TrajetSimple ( )
 #ifdef MAP
     cout << "Appel au destructeur de <TrajetSimple>" << endl;
 #endif
-  delete[] VilleDepart;
-  delete[] VilleArrivee;
-  delete[] MoyenTransport;
+  delete[] villeDepart;
+  delete[] villeArrivee;
+  delete[] moyenTransport;
 } //----- Fin de ~TrajetSimple
 
 
