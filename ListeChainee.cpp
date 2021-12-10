@@ -58,6 +58,7 @@ void ListeChainee::AjouterTri( Trajet * contenu )
   {
     debut = new Maillon(contenu);
     fin = debut;
+    ++nbMaillon;
   }
   else
   {
@@ -123,6 +124,8 @@ void ListeChainee::AjouterDeb( Trajet * contenu )
   #ifdef MAP
       cout << "Appel a la fonction AjouterDeb de <ListeChainee>" << endl;
   #endif
+
+  ++nbMaillon;
 
   if(debut == nullptr) // Si liste vide on place le nouveau maillon en debut et fin
   {

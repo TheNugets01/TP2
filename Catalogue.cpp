@@ -103,9 +103,9 @@ void Catalogue::RechercherProfondeur(const char * unDepart , const char * uneArr
 
     const int NbMaillon = listeParcours->GetNbMaillon();
     DataVille * Ville = new DataVille[ NbMaillon * 2 ];
+    cout << NbMaillon << endl;
     int VilleUnique = 0;
-    bool RedondanceVilleDep;
-    bool RedondanceVilleArr;
+    bool RedondanceVille;
     bool Find = false;
 
     Maillon * debutListe = listeParcours->GetDebut();
@@ -115,46 +115,31 @@ void Catalogue::RechercherProfondeur(const char * unDepart , const char * uneArr
     while( actuelle != nullptr )
     // Parcour du catalogue
     {
-        RedondanceVilleDep = false;
-        RedondanceVilleArr = false;
+        RedondanceVille = false;
         for(int i = 0 ; i < VilleUnique ; ++i)
         // Parcours des datas par ville
         {
-            if( strcmp(actuelle->GetTrajet()->GetVilleDepart() , Ville[i].Nom) == 0 )
+            if( strcmp(actuelle->GetTrajet()->GetVilleDepart() , Ville[i].Nom) == 0
+              ||strcmp(actuelle->GetTrajet()->GetVilleArrivee() , Ville[i].Nom) == 0 )
             // On verifie que la ville n'existe pas déjà
             {
-                RedondanceVilleDep = true;
-            }
-
-            if( strcmp(actuelle->GetTrajet()->GetVilleArrivee() , Ville[i].Nom) == 0 )
-            // On verifie que la ville n'existe pas déjà
-            {
-                RedondanceVilleArr = true;
+                RedondanceVille = true;
             }
 
         }
 
-        if( !RedondanceVilleDep )
+        if( !RedondanceVille )
         // Si la ville n'existe pas on l'ajoute
         {   
             Ville[ VilleUnique ].Nom = new char[ strlen( actuelle->GetTrajet()->GetVilleDepart() ) + 1];
             strcpy( Ville[VilleUnique].Nom , actuelle->GetTrajet()->GetVilleDepart() );
 
             if (strcmp( Ville[ VilleUnique ].Nom, unDepart) == 0 )
-            // Remplir la case Parent du départ pour prevenir le fait d'y passer deux fois
+            // Remplir la case Parent du départ pour eviter d'y passer deux fois
             {
                 Ville[ VilleUnique ].Parent = new char[ strlen( "PointDeDepart" ) + 1 ];
                 strcpy( Ville[ VilleUnique ].Parent , "PointDeDepart");
             }
-            
-            ++VilleUnique;
-        }
-
-        if( !RedondanceVilleArr && Ville[ VilleUnique ].Nom == nullptr )
-        // Si la ville n'existe pas on l'ajoute
-        {   
-            Ville[ VilleUnique ].Nom = new char[ strlen( actuelle->GetTrajet()->GetVilleArrivee() ) + 1 ];
-            strcpy( Ville[VilleUnique].Nom , actuelle->GetTrajet()->GetVilleArrivee() );
             
             ++VilleUnique;
         }
