@@ -1,33 +1,21 @@
 EXTFLAGS = -ansi -pedantic -Wall -std=c++11
 
-all: sejours
+all : analog
 
-MAP: EXTFLAGS += -DMAP
-MAP: sejours
+MAP : EXTFLAGS += -DMAP
+MAP : analog
 
-GETSET: EXTFLAGS += -DGETSET
-GETSET: sejours
+analog : Ligne.o FluxLog.o TraiterLog.o main.o
+		g++ -o analog Ligne.o FluxLog.o TraiterLog.o main.o $(EXTFLAGS)
 
-sejours : Catalogue.o ListeChainee.o Maillon.o Trajet.o  TrajetSimple.o TrajetCompose.o main.o 
-		g++ -o sejours Catalogue.o ListeChainee.o Maillon.o Trajet.o TrajetSimple.o TrajetCompose.o main.o $(EXTFLAGS)
+Ligne.cpp : Ligne.cpp
+		g++ -c -g $(EXTFLAGS) Ligne.cpp
 
-Catalogue.o : Catalogue.cpp
-		g++ -c -g $(EXTFLAGS) Catalogue.cpp
+FluxLog.cpp : FluxLog.cpp
+		g++ -c -g $(EXTFLAGS) FluxLog.cpp
 
-ListeChainee.o : ListeChainee.cpp
-		g++ -c -g $(EXTFLAGS) ListeChainee.cpp
-
-Maillon.o : Maillon.cpp
-		g++ -c -g $(EXTFLAGS) Maillon.cpp
-
-Trajet.o : Trajet.cpp
-		g++ -c -g $(EXTFLAGS) Trajet.cpp
-
-TrajetSimple.o : TrajetSimple.cpp
-		g++ -c -g $(EXTFLAGS) TrajetSimple.cpp
-
-TrajetCompose.o : TrajetCompose.cpp
-		g++ -c -g $(EXTFLAGS) TrajetCompose.cpp
+TraiterLog.cpp : TraiterLog.cpp
+		g++ -c -g $(EXTFLAGS) TraiterLog.cpp
 
 main.o : main.cpp
 		g++ -c -g $(EXTFLAGS) main.cpp
